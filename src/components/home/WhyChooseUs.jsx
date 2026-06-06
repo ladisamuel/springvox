@@ -247,7 +247,7 @@ export default function WhyChooseUs() {
         </motion.div>
 
         {/* Features Grid — 4 columns on large, staggered heights */}
-        <div className="border grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {features.map((feature, i) => (
             <div key={feature.title} className={i % 2 === 1 ? 'lg:mt-8' : ''}>
               <FeatureCard feature={feature} index={i} />
