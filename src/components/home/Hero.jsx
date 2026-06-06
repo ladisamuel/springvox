@@ -39,7 +39,7 @@ function FloatingCard({ icon: Icon, title, delay, position }) {
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden pt-30">
+    <section className="relative flex items-center overflowhidden pt-30">
       {/* Background Effects */}
       <div className="absolute inset-0 bg-gradient-to-b from-dark via-dark to-secondary/20 z-0" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(2,153,177,0.15),_transparent_50%)] z-0" />
@@ -61,7 +61,7 @@ export default function Hero() {
       </motion.div>
       {/* Content */}
       <div className="section-padding relative z-10 w-full mx-auto">
-        <div className="grid lg:grid-cols-[9fr_3fr] gap-12 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-[9fr_3fr] lg:gap-16 items-center">
           {/* Left Column - Text */}
           {/* <div className="max-w-2xl flex flex-col items-center justify-center border-4"> */}
           <div class="text-center lg:text-left">
