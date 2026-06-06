@@ -1,13 +1,15 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { Github, Twitter, Linkedin, Mail, MapPin, Phone, ArrowUpRight } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 const footerLinks = {
   Products: [
     { name: 'ReKallIQ', href: '#' },
-    { name: 'AegisIDS', href: '#' },
-    { name: 'TrueKall', href: '#' },
+    { name: 'SpringVox PBX', href: '#' },
     { name: 'Coming Soon', href: '#' },
+    // { name: 'AegisIDS', href: '#' },
+    // { name: 'TrueKall', href: '#' },
   ],
   Services: [
     { name: 'Software Development', href: '#services' },
@@ -18,7 +20,7 @@ const footerLinks = {
     { name: 'Digital Marketing', href: '#services' },
   ],
   Company: [
-    { name: 'About Us', href: '#about' },
+    { name: 'About Us', href: '/about-us' },
     { name: 'Our Team', href: '#' },
     { name: 'Careers', href: '#' },
     { name: 'Blog', href: '#' },
@@ -59,14 +61,17 @@ export default function Footer() {
                 <span className="text-primary/80 text-[10px] font-medium tracking-widest uppercase">Solution</span>
               </div>
             </a>
-            <p className="text-gray-400 text-sm leading-relaxed mb-6 max-w-sm">
+            {/* <p className="text-gray-400 text-sm leading-relaxed mb-6 max-w-sm">
               Building intelligent software solutions for forward-thinking businesses. 
               AI, enterprise software, and digital transformation.
+            </p> */}
+            <p className="text-gray-400 text-sm leading-relaxed mb-6 max-w-sm">
+            We help organizations modernize their operations through custom software development, AI-powered systems, VoIP communication solutions, digital marketing and brand promotion, cybersecurity tools, and enterprise automation.
             </p>
             <div className="space-y-3">
               <div className="flex items-center gap-3 text-gray-400 text-sm">
                 <Mail className="w-4 h-4 text-primary" />
-                hello@springvox.com
+                support@springvox.com
               </div>
               <div className="flex items-center gap-3 text-gray-400 text-sm">
                 <Phone className="w-4 h-4 text-primary" />
@@ -86,13 +91,13 @@ export default function Footer() {
               <ul className="space-y-3">
                 {links.map((link) => (
                   <li key={link.name}>
-                    <a
-                      href={link.href}
+                    <Link
+                      to={link.href}
                       className="text-gray-400 text-sm hover:text-primary transition-colors duration-300 flex items-center gap-1 group"
                     >
                       {link.name}
                       <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>

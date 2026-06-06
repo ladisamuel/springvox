@@ -2,17 +2,20 @@ import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, ChevronRight } from 'lucide-react'
 import logo from '../assets/logo/springvox-logo-light.png'
+import { Link, useNavigate } from 'react-router-dom'
 const navLinks = [
+  { name: 'About us', href: '/about-us' },
   { name: 'Products', href: '#products' },
   { name: 'Services', href: '#services' },
   { name: 'Industries', href: '#industries' },
-  { name: 'About', href: '#about' },
+  // { name: 'About', href: '#about' },
   { name: 'Contact', href: '#contact' },
 ]
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const navigate = useNavigate()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,7 +38,7 @@ export default function Navbar() {
         }`}
       >
         <div className="section-padding mx-auto flex items-center justify-between">
-          <a href="#" className="flex items-center gap-2 group">
+          <Link to='/' className="flex items-center gap-2 group">
             <div className="relative w10 h-10 flex items-center justify-center">
               <img src={logo} class="h-full" alt="SpringVox Logo" />
             {/* 
@@ -53,7 +56,7 @@ export default function Navbar() {
                 Solution
               </span>
             </div> */}
-          </a>
+          </Link>
 
           <div className="hidden lg:flex items-center gap-8">
             {navLinks.map((link) => (

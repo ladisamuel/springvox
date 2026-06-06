@@ -1,0 +1,26 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Navbar from "../components/Navbar";
+import CustomCursor from "../components/CustomCursor";
+import ScrollProgress from "../components/ScrollProgress";
+import Footer from "../components/Footer";
+
+import AboutUSPage from "../pages/AboutUSPage";
+import HomePage from "../pages/HomePage";
+
+
+export default function Router () {
+
+    return (
+        <BrowserRouter>
+            <CustomCursor />
+            <ScrollProgress />
+            <Navbar />
+            {/* <Router /> */}
+            <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/about-us" element={<AboutUSPage />} />
+            </Routes>
+            <Footer />
+        </BrowserRouter>
+    )
+}

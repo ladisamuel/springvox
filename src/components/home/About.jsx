@@ -121,7 +121,7 @@ const values = [
             >
               <p>
                 SpringVox Solution Limited is a premier technology company specializing in software 
-                development, enterprise solutions, artificial intelligence, cybersecurity, communication systems and digital transformation. 
+                development, enterprise solutions, artificial intelligence, cybersecurity, VoIP communication systems and digital transformation. 
                 We build our own innovative products while delivering world-class technology services 
                 to organizations across industries.
               </p>

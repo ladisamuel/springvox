@@ -1,9 +1,9 @@
-import React from 'react'
-import { motion } from 'framer-motion'
-import { useMousePosition } from '../hooks/useMousePosition'
+import React from "react";
+import { motion } from "framer-motion";
+import { useMousePosition } from "../../hooks/useMousePosition";
 
-export default function Spotlight({ children, className = '' }) {
-  const { x, y } = useMousePosition()
+export default function Spotlight({ children, className = "" }) {
+  const { x, y } = useMousePosition();
 
   return (
     <div className={`relative overflow-hidden ${className}`}>
@@ -15,5 +15,5 @@ export default function Spotlight({ children, className = '' }) {
       />
       {children}
     </div>
-  )
+  );
 }

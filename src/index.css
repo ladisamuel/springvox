@@ -186,3 +186,8 @@
     animation-delay: 1000ms;
   }
 }
+
+.text-muted {
+  @apply text-gray-400;
+  /* color: rgba(255, 255, 255, 0.6); */
+}

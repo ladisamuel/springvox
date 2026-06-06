@@ -29,3 +29,17 @@ export const ThreeScene = lazy(() => import("../components/ThreeScene"), {
     </div>
   ),
 });
+
+
+
+  export const OurFeatures = [
+    { title: "Enterprise-Grade Security", description: "SOC 2 compliant infrastructure with end-to-end encryption, zero-trust architecture, and continuous monitoring.", icon: "shield" },
+    { title: "Scalable Architecture", description: "Cloud-native solutions designed to scale from startups to enterprises with millions of users.", icon: "layers" },
+    { title: "Innovative Technologies", description: "Leveraging the latest in AI, blockchain, edge computing, and quantum-ready architectures.", icon: "cpu" },
+    { title: "Experienced Team", description: "100+ senior engineers, architects, and designers with decades of combined industry expertise.", icon: "users" },
+    { title: "Reliable Support", description: "24/7 dedicated support with 99.9% uptime SLA and guaranteed response times.", icon: "headphones" },
+    { title: "Modern UI/UX Standards", description: "Pixel-perfect interfaces designed for accessibility, performance, and exceptional user experiences.", icon: "palette" },
+    { title: "Fast Deployment", description: "Agile methodology with continuous delivery, getting your products to market 40% faster.", icon: "zap" },
+    { title: "Cost-Effective Solutions", description: "Optimized resource utilization and efficient processes delivering maximum ROI.", icon: "dollar" },
+  ];
+  
