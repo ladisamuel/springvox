@@ -7,7 +7,7 @@ const navLinks = [
   { name: 'About us', href: '/about-us' },
   { name: 'Products', href: '/#products' },
   { name: 'Services', href: '/#services' },
-  { name: 'Investors', href: '/investors' },
+  // { name: 'Investors', href: '/investors' },
   // { name: 'About', href: '#about' },
   { name: 'Contact', href: '/contact' },
 ]
