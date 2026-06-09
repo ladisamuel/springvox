@@ -39,7 +39,7 @@ const industries = [
 const teamSizes = ["1–10", "11–50", "51–200", "201–500", "500+"];
 
 export default function WaitlistModal({ isOpen, onClose }) {
-// export default function WaitlistModal({ isOpen, onClose }: Props) {
+  // export default function WaitlistModal({ isOpen, onClose }: Props) {
   const [form, setForm] = useState({
     organisation: "",
     name: "",
@@ -78,10 +78,12 @@ export default function WaitlistModal({ isOpen, onClose }) {
 
   const validate = useCallback(() => {
     const errs = {};
-    if (!form.organisation.trim()) errs.organisation = "Organisation name is required";
+    if (!form.organisation.trim())
+      errs.organisation = "Organisation name is required";
     if (!form.name.trim()) errs.name = "Your name is required";
     if (!form.email.trim()) errs.email = "Work email is required";
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) errs.email = "Invalid email address";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email))
+      errs.email = "Invalid email address";
     setErrors(errs);
     return Object.keys(errs).length === 0;
   }, [form]);
@@ -112,7 +114,8 @@ export default function WaitlistModal({ isOpen, onClose }) {
     }
   };
 
-  const inputClass = "w-full px-4 py-2.5 text-sm bg-white/5 border border-white/10 rounded-lg text-white placeholder-muted/50 focus:outline-none focus:border-[#0299b1]/50 focus:ring-1 focus:ring-[#0299b1]/20 transition-colors";
+  const inputClass =
+    "w-full px-4 py-2.5 text-sm bg-white/5 border border-white/10 rounded-lg text-white placeholder-muted/50 focus:outline-none focus:border-[#0299b1]/50 focus:ring-1 focus:ring-[#0299b1]/20 transition-colors";
   const labelClass = "block text-sm font-medium text-muted mb-1.5";
   const errorClass = "text-xs text-red-400 mt-1";
 
@@ -143,7 +146,15 @@ export default function WaitlistModal({ isOpen, onClose }) {
               className="absolute top-4 right-4 text-gray-500 hover:text-white transition-colors"
               aria-label="Close modal"
             >
-              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg
+                className="w-5 h-5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
                 <line x1="18" y1="6" x2="6" y2="18" />
                 <line x1="6" y1="6" x2="18" y2="18" />
               </svg>
@@ -151,11 +162,16 @@ export default function WaitlistModal({ isOpen, onClose }) {
 
             {!submitted ? (
               <>
-                <h2 id="waitlist-title" className="text-xl font-bold text-white mb-2">
+                <h2
+                  id="waitlist-title"
+                  className="text-xl font-bold text-white mb-2"
+                >
                   Join the ReKallIQ Pilot Programme
                 </h2>
                 <p className="text-sm text-muted mb-6">
-                  Be among the first organisations to experience enterprise AI knowledge management. Free access during pilot in exchange for your feedback.
+                  Be among the first organisations to experience enterprise AI
+                  knowledge management. Free access during pilot in exchange for
+                  your feedback.
                 </p>
 
                 <form onSubmit={handleSubmit} className="space-y-4">
@@ -166,9 +182,11 @@ export default function WaitlistModal({ isOpen, onClose }) {
                       value={form.organisation}
                       onChange={(e) => update("organisation", e.target.value)}
                       className={inputClass}
-                      placeholder="e.g. Acme Corp"
+                      placeholder="e.g. Nexios"
                     />
-                    {errors.organisation && <p className={errorClass}>{errors.organisation}</p>}
+                    {errors.organisation && (
+                      <p className={errorClass}>{errors.organisation}</p>
+                    )}
                   </div>
 
                   <div>
@@ -192,7 +210,9 @@ export default function WaitlistModal({ isOpen, onClose }) {
                       className={inputClass}
                       placeholder="e.g. jane@acme.com"
                     />
-                    {errors.email && <p className={errorClass}>{errors.email}</p>}
+                    {errors.email && (
+                      <p className={errorClass}>{errors.email}</p>
+                    )}
                   </div>
 
                   <div>
@@ -202,9 +222,13 @@ export default function WaitlistModal({ isOpen, onClose }) {
                       onChange={(e) => update("industry", e.target.value)}
                       className={inputClass}
                     >
-                      <option value="" className="bg-[#0a1a2e]">Select industry</option>
+                      <option value="" className="bg-[#0a1a2e]">
+                        Select industry
+                      </option>
                       {industries.map((ind) => (
-                        <option key={ind} value={ind} className="bg-[#0a1a2e]">{ind}</option>
+                        <option key={ind} value={ind} className="bg-[#0a1a2e]">
+                          {ind}
+                        </option>
                       ))}
                     </select>
                   </div>
@@ -216,15 +240,26 @@ export default function WaitlistModal({ isOpen, onClose }) {
                       onChange={(e) => update("teamSize", e.target.value)}
                       className={inputClass}
                     >
-                      <option value="" className="bg-[#0a1a2e]">Select team size</option>
+                      <option value="" className="bg-[#0a1a2e]">
+                        Select team size
+                      </option>
                       {teamSizes.map((size) => (
-                        <option key={size} value={size} className="bg-[#0a1a2e]">{size}</option>
+                        <option
+                          key={size}
+                          value={size}
+                          className="bg-[#0a1a2e]"
+                        >
+                          {size}
+                        </option>
                       ))}
                     </select>
                   </div>
 
                   <div>
-                    <label className={labelClass}>Primary Use Case <span className="text-muted/50">(optional)</span></label>
+                    <label className={labelClass}>
+                      Primary Use Case{" "}
+                      <span className="text-muted/50">(optional)</span>
+                    </label>
                     <textarea
                       value={form.useCase}
                       onChange={(e) => update("useCase", e.target.value)}
@@ -233,7 +268,9 @@ export default function WaitlistModal({ isOpen, onClose }) {
                       className={inputClass + " resize-none"}
                       placeholder="e.g. onboarding knowledge, policy Q&A, HR handbook access..."
                     />
-                    <p className="text-xs text-muted/50 mt-1 text-right">{form.useCase.length}/300</p>
+                    <p className="text-xs text-muted/50 mt-1 text-right">
+                      {form.useCase.length}/300
+                    </p>
                   </div>
 
                   <button
@@ -248,13 +285,25 @@ export default function WaitlistModal({ isOpen, onClose }) {
 
                 <p className="mt-4 text-xs text-muted/60 flex items-start gap-1.5">
                   {/* <span>\uD83D\uDD12</span> */}
-                  <span>Your information is never shared or used to train public AI models. We&apos;re selecting a limited number of pilot organisations.</span>
+                  <span>
+                    Your information is never shared or used to train public AI
+                    models. We&apos;re selecting a limited number of pilot
+                    organisations.
+                  </span>
                 </p>
               </>
             ) : (
               <div className="text-center py-8">
                 <div className="w-16 h-16 rounded-full bg-green-500/20 flex items-center justify-center mx-auto mb-4">
-                  <svg className="w-8 h-8 text-green-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <svg
+                    className="w-8 h-8 text-green-400"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
                     <polyline points="20 6 9 17 4 12" />
                   </svg>
                 </div>
@@ -262,7 +311,9 @@ export default function WaitlistModal({ isOpen, onClose }) {
                   ✅ You&apos;re on the list!
                 </h2>
                 <p className="text-sm text-muted mb-6">
-                  Thank you, {form.name}. We&apos;ll review your application and reach out to {form.email} with next steps. In the meantime, explore ReKallIQ on our product site.
+                  Thank you, {form.name}. We&apos;ll review your application and
+                  reach out to {form.email} with next steps. In the meantime,
+                  explore ReKallIQ on our product site.
                 </p>
                 <a
                   href="https://springvox-knowledge-ai.vercel.app/"

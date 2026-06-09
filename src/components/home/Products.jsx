@@ -231,7 +231,7 @@ function ProductPanel({ product }) {
               rel={
                 product.primaryCta.external ? "noopener noreferrer" : undefined
               }
-              className="inline-flex items-center gap-2 px-6 py-3 text-sm font-medium text-white rounded-xl transition-all duration-300 shadow-lg"
+              className="btn-primary flex items-center gap-2"
               style={{
                 backgroundColor: product.color,
                 boxShadow: `0 0 20px ${product.color}30`,
@@ -583,27 +583,73 @@ export default function Products() {
 
       <div className="section-padding relative z-10 mx-auto">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
-        >
-          <span className="text-primary text-sm font-semibold tracking-widest uppercase mb-4 block">
-            Our Products
-          </span>
-          <h2 className="text-4xl lg:text-5xl font-bold mb-4">
-            Innovative Platforms{" "}
-            <span className="text-gradient">We&apos;ve Built</span>
-          </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
+
+
+                  <div class="lg:max-w-[75%] border4 text-center mb-4  lg:text-left">
+                    <motion.div
+                      initial={{ opacity: 0, x: -30 }}
+                      animate={isInView ? { opacity: 1, x: 0 } : {}}
+                      transition={{ duration: 0.8 }}
+                    >
+        
+                                  <motion.div
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.6 }}
+                                    className="inline-flex w-fit items-center gap-2 px-4 py-2 rounded-full glass mb-8"
+                                  >
+                                    <span className="text-sm text-gray-300">Our Products</span>
+                                  </motion.div>
+        
+                      <span className="text-primary text-sm font-semibold tracking-widest uppercase mb-4 block">
+                        
+                      </span>
+                      <h2 className="text-3xl lg:text-5xl font-bold mb-6 leading-tight">
+                        Innovative Platforms{' '}
+                        <br class="hidden lg:block" />
+                        <span className="text-gradient text3xl">We've Built</span>{' '}
+                        {/* <span className="text-gradient text3xl">Company</span> */}
+                      </h2>
+                    </motion.div>
+        
+                    <motion.div
+                      initial={{ opacity: 0, x: -30 }}
+                      animate={isInView ? { opacity: 1, x: 0 } : {}}
+                      transition={{ duration: 0.8, delay: 0.2 }}
+                      className="space-y-6 text-gray-400 leading-relaxed"
+                    >
+                      <p>
             Flagship products designed for enterprise performance, security, and
             scale — built in-house by SpringVox engineers.
-          </p>
-        </motion.div>
+                      </p>
+                      {/* <p>
+                        Our mission is to harness the power of emerging technologies to solve real-world 
+                        challenges — making businesses smarter, faster, and more competitive in the digital age.
+                      </p> */}
+                    </motion.div>
+        
+                    {/* <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={isInView ? { opacity: 1, y: 0 } : {}}
+                      transition={{ duration: 0.8, delay: 0.4 }}
+                      className="flex gap-4 mt-8"
+                    >
+                      <a href="#services" className="btn-primary flex items-center gap-2">
+                        Our Story
+                        <ArrowRight className="w-4 h-4" />
+                      </a>
+                      <a href="#contact" className="btn-secondary flex items-center gap-2">
+                        Meet the Team
+                        <ArrowRight className="w-4 h-4" />
+                      </a>
+                    </motion.div> */}
+                  </div>
 
+ 
         {/* Tabs */}
-        <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-10 sm:mb-12">
+        <div className="flex flex-wrap justify-center lg:justify-start gap-2 sm:gap-3 mt-2 mb-10 sm:mb-12">
+
+        {/* <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-10 sm:mb-12"> */}
           {products.map((tab) => {
             const isActive = activeTab === tab.id;
             return (

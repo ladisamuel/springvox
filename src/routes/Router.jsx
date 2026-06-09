@@ -9,6 +9,10 @@ import HomePage from "../pages/HomePage";
 import WaitlistModal from "../components/WaitlistModal";
 import { useState } from "react";
 import ReKallIQPopup from "../components/ReKallIQPopup";
+import ContactPage from "../pages/ContactPage";
+import InvestorsPage from "../pages/InvestorsPage";
+import PrivacyPolicy from "../pages/PrivacyPolicy";
+import TermsOfService from "../pages/TermsOfService";
 
 
 export default function Router () {
@@ -23,6 +27,10 @@ export default function Router () {
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/about-us" element={<AboutUSPage />} />
+                <Route path="/contact" element={<ContactPage />} />
+                <Route path="/investors" element={<InvestorsPage />} />
+                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="/terms-of-service" element={<TermsOfService />} />
             </Routes>
             <Footer />
             <WaitlistModal

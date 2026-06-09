@@ -1,4 +1,3 @@
-"use client";
 
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -12,14 +11,14 @@ export default function ReKallIQPopup({ onOpenWaitlist }) {
   const [dismissed, setDismissed] = useState(false);
 
   useEffect(() => {
-    // const shown = sessionStorage.getItem("sv_rekalliq_popup");
-    // if (true) {
-    //   const timer = setTimeout(() => {
-    //     setVisible(true);
-    //     sessionStorage.setItem("sv_rekalliq_popup", "1");
-    //   }, 3000);
-    //   return () => clearTimeout(timer);
-    // }
+    const shown = sessionStorage.getItem("sv_rekalliq_popup");
+    if (true) {
+      const timer = setTimeout(() => {
+        setVisible(true);
+        sessionStorage.setItem("sv_rekalliq_popup", "1");
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
     setVisible(true);
   }, []);
 

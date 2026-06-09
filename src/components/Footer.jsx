@@ -10,36 +10,39 @@ import {
   ArrowUpRight,
 } from "lucide-react";
 import { Link } from "react-router-dom";
-import logo from '../assets/logo/springvox-logo-light.png'
+import logo from "../assets/logo/springvox-logo-light.png";
 
 const footerLinks = {
   Products: [
-    { name: "ReKallIQ", href: "#" },
+    { name: "ReKallIQ", href: "https://springvox-knowledge-ai.vercel.app/" },
     { name: "SpringVox PBX", href: "#" },
     { name: "Coming Soon", href: "#" },
     // { name: 'AegisIDS', href: '#' },
     // { name: 'TrueKall', href: '#' },
   ],
   Services: [
-    { name: "Software Development", href: "#services" },
-    { name: "AI Solutions", href: "#services" },
-    { name: "Cybersecurity", href: "#services" },
-    { name: "Cloud Infrastructure", href: "#services" },
-    { name: "UI/UX Design", href: "#services" },
-    { name: "Digital Marketing", href: "#services" },
+    { name: "Software Development", href: "/#services" },
+    { name: "AI Solutions", href: "/#services" },
+    { name: "Cybersecurity", href: "/#services" },
+    { name: "Cloud Infrastructure", href: "/#services" },
+    { name: "UI/UX Design", href: "/#services" },
+    { name: "Digital Marketing", href: "/#services" },
   ],
   Company: [
     { name: "About Us", href: "/about-us" },
-    { name: "Our Team", href: "#" },
-    { name: "Careers", href: "#" },
-    { name: "Blog", href: "#" },
-    { name: "Press", href: "#" },
+    { name: "Contact Us", href: "/contact" },
+    { name: "Privacy Policy", href: "/privacy-policy" },
+    { name: "Terms of Service", href: "/terms-of-service" },
+    // { name: "Our Team", href: "#" },
+    // { name: "Careers", href: "#" },
+    // { name: "Blog", href: "#" },
+    // { name: "Press", href: "#" },
   ],
   Contact: [
-    { name: "Get in Touch", href: "#contact" },
-    { name: "Support", href: "#" },
-    { name: "Book Consultation", href: "#contact" },
-    { name: "Request Demo", href: "#products" },
+    { name: "Get in Touch", href: "/contact" },
+    { name: "Support", href: "/contact" },
+    { name: "Book Consultation", href: "/contact" },
+    { name: "Request Demo", href: "/#products" },
   ],
 };
 
@@ -60,19 +63,6 @@ export default function Footer() {
         <div className="grid lg:grid-cols-6 gap-12 mb-16">
           {/* Brand Column */}
           <div className="lg:col-span-2">
-
-
-            {/* <a href="#" className="flex items-center gap-2 mb-6">
-              <div className="relative w-10 h-10 flex items-center justify-center">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary to-secondary rounded-xl" />
-                <span className="relative text-white font-bold text-lg">S</span>
-              </div>
-              <div className="flex flex-col">
-                <span className="text-white font-bold text-lg leading-tight">SpringVox</span>
-                <span className="text-primary/80 text-[10px] font-medium tracking-widest uppercase">Solution</span>
-              </div>
-            </a> */}
-
             <Link to="/" className="flex items-center gap-2 group mb-6">
               <div className="relative w10 h-10 flex items-center justify-center">
                 <img src={logo} class="h-full" alt="SpringVox Logo" />
@@ -109,7 +99,7 @@ export default function Footer() {
               </div>
               <div className="flex items-center gap-3 text-gray-400 text-sm">
                 <Phone className="w-4 h-4 text-primary" />
-                +1 (555) 123-4567
+                +1 (360) 350-6562
               </div>
               <div className="flex items-center gap-3 text-gray-400 text-sm">
                 <MapPin className="w-4 h-4 text-primary" />
@@ -147,26 +137,27 @@ export default function Footer() {
             © 2024 SpringVox Solution Limited. All rights reserved.
           </p>
 
-          <div className="flex items-center gap-6">
-            <a
-              href="#"
+          {/* <div className="flex items-center gap-6">
+            <Link
+              to="/privacy-policy"
               className="text-gray-500 text-sm hover:text-primary transition-colors"
             >
               Privacy Policy
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              to="/terms-of-service"
               className="text-gray-500 text-sm hover:text-primary transition-colors"
             >
               Terms of Service
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              to="/#"
+              // to="/cookie-policy"
               className="text-gray-500 text-sm hover:text-primary transition-colors"
             >
               Cookie Policy
-            </a>
-          </div>
+            </Link>
+          </div> */}
 
           <div className="flex items-center gap-4">
             {socialLinks.map((social) => (

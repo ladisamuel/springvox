@@ -1,201 +1,239 @@
-import React, { useRef, useEffect, useState } from 'react'
-import { motion, useInView, useMotionValue, useTransform, animate } from 'framer-motion'
+import React, { useRef, useEffect, useState } from "react";
 import {
-  Shield, Scale, Cpu, Users, Headphones, Layout, Rocket, BarChart3,
-  ArrowUpRight, Zap, CheckCircle2, Lock, Globe, Sparkles
-} from 'lucide-react'
-import FeatureCard from './FeatureCard'
+  motion,
+  useInView,
+  useMotionValue,
+  useTransform,
+  animate,
+} from "framer-motion";
+import {
+  Shield,
+  Scale,
+  Cpu,
+  Users,
+  Headphones,
+  Layout,
+  Rocket,
+  BarChart3,
+  ArrowUpRight,
+  Zap,
+  CheckCircle2,
+  Lock,
+  Globe,
+  Sparkles,
+} from "lucide-react";
+import FeatureCard from "./FeatureCard";
 // import FeatureCard from './FeatureCard'
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 const features = [
   {
     icon: Shield,
-    title: 'Enterprise-Grade Security',
-    description: 'Every solution adheres to enterprise security standards, encryption protocols, and compliance frameworks including SOC 2, ISO 27001, and GDPR.',
-    stat: '99.99%',
-    statLabel: 'Uptime SLA',
-    color: '#0299b1',
-    accent: 'from-[#0299b1]/20 to-transparent'
+    title: "Enterprise-Grade Security",
+    description:
+      "Every solution adheres to enterprise security standards, encryption protocols, and compliance frameworks including SOC 2, ISO 27001, and GDPR.",
+    stat: "99.99%",
+    statLabel: "Uptime SLA",
+    color: "#0299b1",
+    accent: "from-[#0299b1]/20 to-transparent",
   },
   {
     icon: Scale,
-    title: 'Scalable Architecture',
-    description: 'Systems designed to grow with you — from 10 users to 10 million, our architecture scales horizontally without compromise.',
-    stat: '10x',
-    statLabel: 'Faster Scale',
-    color: '#05d8f5',
-    accent: 'from-[#05d8f5]/20 to-transparent'
+    title: "Scalable Architecture",
+    description:
+      "Systems designed to grow with you — from 10 users to 10 million, our architecture scales horizontally without compromise.",
+    stat: "10x",
+    statLabel: "Faster Scale",
+    color: "#05d8f5",
+    accent: "from-[#05d8f5]/20 to-transparent",
   },
   {
     icon: Cpu,
-    title: 'Innovative Technologies',
-    description: 'We stay ahead of the curve — adopting AI, edge computing, and emerging frameworks before they become mainstream.',
-    stat: '40+',
-    statLabel: 'Tech Patents',
-    color: '#45919D',
-    accent: 'from-[#45919D]/20 to-transparent'
+    title: "Innovative Technologies",
+    description:
+      "We stay ahead of the curve — adopting AI, edge computing, and emerging frameworks before they become mainstream.",
+    stat: "40+",
+    statLabel: "Tech Patents",
+    color: "#45919D",
+    accent: "from-[#45919D]/20 to-transparent",
   },
   {
     icon: Users,
-    title: 'Experienced Team',
-    description: 'Seasoned engineers, designers, and strategists with deep expertise across domains and industries.',
-    stat: '150+',
-    statLabel: 'Certified Experts',
-    color: '#0299b1',
-    accent: 'from-[#0299b1]/20 to-transparent'
+    title: "Experienced Team",
+    description:
+      "Seasoned engineers, designers, and strategists with deep expertise across domains and industries.",
+    stat: "150+",
+    statLabel: "Certified Experts",
+    color: "#0299b1",
+    accent: "from-[#0299b1]/20 to-transparent",
   },
   {
     icon: Headphones,
-    title: 'Reliable Support',
-    description: 'Dedicated support teams providing SLA-backed assistance, monitoring, and proactive issue resolution 24/7.',
-    stat: '<2min',
-    statLabel: 'Avg Response',
-    color: '#05d8f5',
-    accent: 'from-[#05d8f5]/20 to-transparent'
+    title: "Reliable Support",
+    description:
+      "Dedicated support teams providing SLA-backed assistance, monitoring, and proactive issue resolution 24/7.",
+    stat: "<2min",
+    statLabel: "Avg Response",
+    color: "#05d8f5",
+    accent: "from-[#05d8f5]/20 to-transparent",
   },
   {
     icon: Layout,
-    title: 'Modern UI/UX Standards',
-    description: 'Beautiful, intuitive interfaces grounded in user research, design systems, and accessibility best practices.',
-    stat: 'WCAG 2.1',
-    statLabel: 'AA Compliant',
-    color: '#45919D',
-    accent: 'from-[#45919D]/20 to-transparent'
+    title: "Modern UI/UX Standards",
+    description:
+      "Beautiful, intuitive interfaces grounded in user research, design systems, and accessibility best practices.",
+    stat: "WCAG 2.1",
+    statLabel: "AA Compliant",
+    color: "#45919D",
+    accent: "from-[#45919D]/20 to-transparent",
   },
   {
     icon: Rocket,
-    title: 'Fast Deployment',
-    description: 'Agile delivery methodology, CI/CD pipelines, and DevOps culture that gets your product to market faster.',
-    stat: '3x',
-    statLabel: 'Faster Delivery',
-    color: '#0299b1',
-    accent: 'from-[#0299b1]/20 to-transparent'
+    title: "Fast Deployment",
+    description:
+      "Agile delivery methodology, CI/CD pipelines, and DevOps culture that gets your product to market faster.",
+    stat: "3x",
+    statLabel: "Faster Delivery",
+    color: "#0299b1",
+    accent: "from-[#0299b1]/20 to-transparent",
   },
   {
     icon: BarChart3,
-    title: 'Data-Driven Insights',
-    description: 'Real-time dashboards, analytics, and intelligence built into every solution so decisions are always informed.',
-    stat: '500M+',
-    statLabel: 'Events/Day',
-    color: '#05d8f5',
-    accent: 'from-[#05d8f5]/20 to-transparent'
+    title: "Data-Driven Insights",
+    description:
+      "Real-time dashboards, analytics, and intelligence built into every solution so decisions are always informed.",
+    stat: "500M+",
+    statLabel: "Events/Day",
+    color: "#05d8f5",
+    accent: "from-[#05d8f5]/20 to-transparent",
   },
-]
+];
 
 const trustBadges = [
-  { icon: Lock, label: 'SOC 2 Certified' },
-  { icon: Globe, label: 'GDPR Compliant' },
-  { icon: Zap, label: 'ISO 27001' },
-  { icon: CheckCircle2, label: 'HIPAA Ready' },
-  { icon: Sparkles, label: 'AI-Powered' },
-]
+  { icon: Lock, label: "SOC 2 Certified" },
+  { icon: Globe, label: "GDPR Compliant" },
+  { icon: Zap, label: "ISO 27001" },
+  { icon: CheckCircle2, label: "HIPAA Ready" },
+  { icon: Sparkles, label: "AI-Powered" },
+];
 
 // ─── Floating Particle Canvas ───────────────────────────────────────────────
 function ParticleField() {
-  const canvasRef = useRef(null)
+  const canvasRef = useRef(null);
 
   useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-    const ctx = canvas.getContext('2d')
-    let w, h, particles = []
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    let w,
+      h,
+      particles = [];
 
     const resize = () => {
-      w = canvas.width = canvas.offsetWidth * 2
-      h = canvas.height = canvas.offsetHeight * 2
-      ctx.scale(2, 2)
-    }
-    resize()
-    window.addEventListener('resize', resize)
+      w = canvas.width = canvas.offsetWidth * 2;
+      h = canvas.height = canvas.offsetHeight * 2;
+      ctx.scale(2, 2);
+    };
+    resize();
+    window.addEventListener("resize", resize);
 
-    const count = 40
+    const count = 40;
     for (let i = 0; i < count; i++) {
       particles.push({
-        x: Math.random() * w / 2,
-        y: Math.random() * h / 2,
+        x: (Math.random() * w) / 2,
+        y: (Math.random() * h) / 2,
         vx: (Math.random() - 0.5) * 0.3,
         vy: (Math.random() - 0.5) * 0.3,
         r: Math.random() * 1.5 + 0.5,
         alpha: Math.random() * 0.4 + 0.1,
-      })
+      });
     }
 
-    let raf
+    let raf;
     const draw = () => {
-      ctx.clearRect(0, 0, w / 2, h / 2)
+      ctx.clearRect(0, 0, w / 2, h / 2);
       for (const p of particles) {
-        p.x += p.vx
-        p.y += p.vy
-        if (p.x < 0 || p.x > w / 2) p.vx *= -1
-        if (p.y < 0 || p.y > h / 2) p.vy *= -1
-        ctx.beginPath()
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(2, 153, 177, ${p.alpha})`
-        ctx.fill()
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0 || p.x > w / 2) p.vx *= -1;
+        if (p.y < 0 || p.y > h / 2) p.vy *= -1;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(2, 153, 177, ${p.alpha})`;
+        ctx.fill();
       }
       // Connect nearby
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x
-          const dy = particles[i].y - particles[j].y
-          const dist = Math.sqrt(dx * dx + dy * dy)
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < 120) {
-            ctx.beginPath()
-            ctx.moveTo(particles[i].x, particles[i].y)
-            ctx.lineTo(particles[j].x, particles[j].y)
-            ctx.strokeStyle = `rgba(2, 153, 177, ${0.08 * (1 - dist / 120)})`
-            ctx.lineWidth = 0.5
-            ctx.stroke()
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = `rgba(2, 153, 177, ${0.08 * (1 - dist / 120)})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
           }
         }
       }
-      raf = requestAnimationFrame(draw)
-    }
-    raf = requestAnimationFrame(draw)
+      raf = requestAnimationFrame(draw);
+    };
+    raf = requestAnimationFrame(draw);
 
     return () => {
-      cancelAnimationFrame(raf)
-      window.removeEventListener('resize', resize)
-    }
-  }, [])
+      cancelAnimationFrame(raf);
+      window.removeEventListener("resize", resize);
+    };
+  }, []);
 
-  return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none opacity-60" />
+  return (
+    <canvas
+      ref={canvasRef}
+      className="absolute inset-0 w-full h-full pointer-events-none opacity-60"
+    />
+  );
 }
 
 // ─── Animated Counter ───────────────────────────────────────────────────────
-function AnimatedCounter({ value, suffix = '', prefix = '' }) {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true })
-  const [display, setDisplay] = useState('0')
+function AnimatedCounter({ value, suffix = "", prefix = "" }) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+  const [display, setDisplay] = useState("0");
 
   useEffect(() => {
-    if (!isInView) return
-    const num = parseFloat(value.replace(/[^0-9.]/g, ''))
-    if (isNaN(num)) { setDisplay(value); return }
-    const duration = 2000
-    const start = performance.now()
-    const tick = (now) => {
-      const progress = Math.min((now - start) / duration, 1)
-      const eased = 1 - Math.pow(1 - progress, 3)
-      const current = Math.round(num * eased)
-      setDisplay(prefix + current + suffix)
-      if (progress < 1) requestAnimationFrame(tick)
+    if (!isInView) return;
+    const num = parseFloat(value.replace(/[^0-9.]/g, ""));
+    if (isNaN(num)) {
+      setDisplay(value);
+      return;
     }
-    requestAnimationFrame(tick)
-  }, [isInView, value, suffix, prefix])
+    const duration = 2000;
+    const start = performance.now();
+    const tick = (now) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = Math.round(num * eased);
+      setDisplay(prefix + current + suffix);
+      if (progress < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }, [isInView, value, suffix, prefix]);
 
-  return <span ref={ref}>{display}</span>
+  return <span ref={ref}>{display}</span>;
 }
-
 
 // ─── Main Section ────────────────────────────────────────────────────────────
 export default function WhyChooseUs() {
-  const sectionRef = useRef(null)
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' })
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   return (
-    <section ref={sectionRef} className="relative py-28 lg:py-36 overflow-hidden">
+    <section
+      ref={sectionRef}
+      className="relative py-28 lg:py-36 overflow-hidden"
+    >
       {/* Deep layered background */}
       <div className="absolute inset-0 bg-[#060b10]" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_0%,rgba(2,153,177,0.08),transparent_50%)]" />
@@ -213,27 +251,62 @@ export default function WhyChooseUs() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
           className="text-center mb-20"
-        > 
+        >
           <span className="text-primary text-sm font-semibold tracking-widest uppercase mb-4 block">
-            Why SpringVox
+
           </span>
           <h2 className="text-4xl lg:text-5xl font-bold mb-4">
-            Built for{' '}
-            <span className="text-gradient">Enterprise</span>{' '}
+             <span className="text-gradient">Enterprise</span>{" "}
             <span className="text-gradient">Excellence</span>
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto">
-            We combine technical depth, design excellence, and strategic thinking to deliver 
-            outcomes that move the needle.
+            We combine technical depth, design excellence, and strategic
+            thinking to deliver outcomes that move the needle.
           </p>
         </motion.div>
+
+        <div class="lg:max-w-[75%] border4 text-center mb-4  lg:text-left">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8 }}
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="inline-flex w-fit items-center gap-2 px-4 py-2 rounded-full glass mb-8"
+            >
+              <span className="text-sm text-gray-300">Why SpringVox</span>
+            </motion.div>
+
+            <span className="text-primary text-sm font-semibold tracking-widest uppercase mb-4 block"></span>
+            <h2 className="text-3xl lg:text-5xl font-bold mb-6 leading-tight">
+              Built for <br class="hidden lg:block" />
+              <span className="text-gradient text3xl">Enterprise</span>{" "}
+              <span className="text-gradient text3xl">Excellence</span>
+            </h2>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="space-y-6 text-gray-400 leading-relaxed"
+          >
+            <p>
+            We combine technical depth, design excellence, and strategic
+            thinking to deliver outcomes that move the needle.
+            </p>
+          </motion.div>
+        </div>
 
         {/* Trust badges bar */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="flex flex-wrap justify-center gap-3 mb-16"
+          className="flex flex-wrap justify-center lg:justify-start gap-3 mb-16"
         >
           {trustBadges.map((badge) => (
             <div
@@ -241,7 +314,9 @@ export default function WhyChooseUs() {
               className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/[0.06] bg-white/[0.02] backdrop-blur-sm"
             >
               <badge.icon className="w-3.5 h-3.5 text-[#45919D]" />
-              <span className="text-[11px] text-gray-400 font-medium tracking-wide">{badge.label}</span>
+              <span className="text-[11px] text-gray-400 font-medium tracking-wide">
+                {badge.label}
+              </span>
             </div>
           ))}
         </motion.div>
@@ -249,7 +324,7 @@ export default function WhyChooseUs() {
         {/* Features Grid — 4 columns on large, staggered heights */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {features.map((feature, i) => (
-            <div key={feature.title} className={i % 2 === 1 ? 'lg:mt-8' : ''}>
+            <div key={feature.title} className={i % 2 === 1 ? "lg:mt-8" : ""}>
               <FeatureCard feature={feature} index={i} />
             </div>
           ))}
@@ -264,81 +339,23 @@ export default function WhyChooseUs() {
         >
           <div className="inline-flex items-center gap-8 px-10 py-5 rounded-2xl border border-white/[0.06] bg-white/[0.02] backdrop-blur-sm">
             <div className="text-left">
-              <div className="text-white font-semibold text-sm">Ready to transform your infrastructure?</div>
-              <div className="text-gray-500 text-xs mt-0.5">Schedule a consultation with our enterprise team.</div>
+              <div className="text-white font-semibold text-sm">
+                Ready to transform your infrastructure?
+              </div>
+              <div className="text-gray-500 text-xs mt-0.5">
+                Schedule a consultation with our enterprise team.
+              </div>
             </div>
             <button className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#0299b1] text-white text-sm font-medium hover:bg-[#05d8f5] transition-colors duration-300 group">
-              Get Started
+              Contact Us
               <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </button>
           </div>
         </motion.div>
       </div>
     </section>
-  )
+  );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // import React, { useRef } from 'react'
 // import { motion, useInView } from 'framer-motion'
@@ -361,7 +378,6 @@ export default function WhyChooseUs() {
 // export default function WhyChooseUs() {
 //   const sectionRef = useRef(null)
 //   const isInView = useInView(sectionRef, { once: true, margin: '-100px' })
-
 
 //   return (
 //     <section ref={sectionRef} className="relative py-24 lg:py-32 overflow-hidden">
@@ -390,13 +406,13 @@ export default function WhyChooseUs() {
 //             <span className="text-gradient">Excellence</span>
 //           </h2>
 //           <p className="text-gray-400 max-w-2xl mx-auto">
-//             We combine technical depth, design excellence, and strategic thinking to deliver 
+//             We combine technical depth, design excellence, and strategic thinking to deliver
 //             outcomes that move the needle.
 //           </p>
 //         </motion.div>
 
 //         {/* Features Grid */}
-//         {/* 
+//         {/*
 //         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
 //           {features.map((feature, i) => (
 //             <motion.div
@@ -417,9 +433,6 @@ export default function WhyChooseUs() {
 //           ))}
 //         </div>
 
-        
-        
-        
 //         */}
 //         <div className="grid sm:grid-cols-2 gap-5 sm:gap-6 max-w-4xl mx-auto">
 //           {OurFeatures.map((feature, i) => (

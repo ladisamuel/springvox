@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, ChevronRight } from 'lucide-react'
+import { Menu, X, ChevronRight, ExternalLink } from 'lucide-react'
 import logo from '../assets/logo/springvox-logo-light.png'
 import { Link, useNavigate } from 'react-router-dom'
 const navLinks = [
   { name: 'About us', href: '/about-us' },
-  { name: 'Products', href: '#products' },
-  { name: 'Services', href: '#services' },
-  { name: 'Industries', href: '#industries' },
+  { name: 'Products', href: '/#products' },
+  { name: 'Services', href: '/#services' },
+  { name: 'Investors', href: '/investors' },
   // { name: 'About', href: '#about' },
-  { name: 'Contact', href: '#contact' },
+  { name: 'Contact', href: '/contact' },
 ]
 
 export default function Navbar() {
@@ -60,25 +60,35 @@ export default function Navbar() {
 
           <div className="hidden lg:flex items-center gap-8">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.name}
-                href={link.href}
+                to={link.href}
                 className="relative text-sm text-gray-300 hover:text-white transition-colors duration-300 group py-2"
               >
                 {link.name}
                 <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-primary to-cyan-400 group-hover:w-full transition-all duration-300" />
-              </a>
+              </Link>
             ))}
           </div>
 
           <div className="hidden lg:flex items-center gap-4">
             <a
-              href="#contact"
+              href="/#products"
               className="btn-primary flex items-center gap-2 text-sm"
             >
               Get Started
               <ChevronRight className="w-4 h-4" />
             </a>
+            
+            <Link
+              to="https://springvox-knowledge-ai.vercel.app/"
+              className="btn-secondary bg-white text-gray-900 border-none flex items-center gap-2 text-sm"
+            >
+              <span>
+              Try Rekal<span className="text-red-600 p-0">iQ</span>
+              </span>
+              <ExternalLink className="w-4 h-4" />
+            </Link>
           </div>
 
           <button
@@ -124,6 +134,17 @@ export default function Navbar() {
               >
                 Get Started
               </motion.a>
+              <motion.a
+                href="https://springvox-knowledge-ai.vercel.app/"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="btn-secondary bg-white/10 text-white border-none mt-1"
+              >
+              Try Rekall<span className="text-red-600 p-0">iQ</span>
+              </motion.a>
+               
             </div>
           </motion.div>
         )}

@@ -43,15 +43,15 @@ export default function CTA() {
           </p>
 
           <div className="flex flex-wrap justify-center gap-4 mb-8">
-            <a href="#contact" className="btn-primary flex items-center gap-2 text-lg px-8 py-4">
+            <a href="#contact" className="btn-primary flex items-center gap-2 ">
               Start a Project
               <ArrowRight className="w-5 h-5" />
             </a>
-            <a href="#contact" className="btn-secondary flex items-center gap-2 text-lg px-8 py-4">
+            <a href="#contact" className="btn-secondary flex items-center gap-2 ">
               <Calendar className="w-5 h-5" />
               Book a Consultation
             </a>
-            <a href="#products" className="btn-secondary flex items-center gap-2 text-lg px-8 py-4">
+            <a href="#products" className="btn-secondary flex items-center gap-2 ">
               <Monitor className="w-5 h-5" />
               Request a Demo
             </a>
