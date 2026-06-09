@@ -60,7 +60,7 @@ export default function TermsOfService() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f] text-white">
+    <div className="min-h-screen section-padding bg-[#0a0a0f] text-white">
     {/* <div className="min-h-screen bg-[#0c1719] text-white"> */}
       {/* Background Grid */}
       <div className="fixed inset-0 pointer-events-none z-0">

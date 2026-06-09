@@ -85,7 +85,7 @@ export default function PrivacyPolicy() {
   }
 
   return (
-    <div className="min-h-screen  bg-[#0a0a0f] text-white">
+    <div className="section-padding bg-[#0a0a0f] text-white">
       {/* Background Grid */}
       <div className="fixed inset-0 pointer-events-none z-0">
         <div className="absolute inset-0 bg-[linear-gradient(rgba(0,212,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,212,255,0.03)_1px,transparent_1px)] bg-[size:60px_60px]" />
