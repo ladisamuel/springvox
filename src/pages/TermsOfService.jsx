@@ -51,6 +51,7 @@ const serviceLevels = [
   },
 ]
 
+
 export default function TermsOfService() {
   const [activeSection, setActiveSection] = useState('acceptance')
 
