@@ -11,6 +11,7 @@ import { useState } from "react";
 import ReKallIQPopup from "../components/ReKallIQPopup";
 import ContactPage from "../pages/ContactPage";
 import InvestorsPage from "../pages/InvestorsPage";
+import ProductPage from "../pages/ProductPage";
 import PrivacyPolicy from "../pages/PrivacyPolicy";
 import TermsOfService from "../pages/TermsOfService";
 
@@ -29,6 +30,7 @@ export default function Router () {
                 <Route path="/about-us" element={<AboutUSPage />} />
                 <Route path="/contact" element={<ContactPage />} />
                 <Route path="/investors" element={<InvestorsPage />} />
+                <Route path="/products" element={<ProductPage />} />
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="/terms-of-service" element={<TermsOfService />} />
             </Routes>

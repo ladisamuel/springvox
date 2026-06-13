@@ -65,6 +65,12 @@ function AnimatedCounter({ value, suffix = '' }) {
   const isInView = useInView(ref, { once: true })
   const [display, setDisplay] = useState('0')
 
+  // const ambient = new THREE.AmbientLight(0xffffff, 0.3)
+  // scene.add(ambient)
+  // const dir = new THREE.DirectionalLight(0xffffff, 1)
+  // dir.position.set(2, 2, 2)
+  // scene.add(dir)
+
   useEffect(() => {
     if (!isInView) return
     const num = parseInt(value.replace(/[^0-9]/g, ''))
@@ -272,7 +278,7 @@ export default function AboutUSPage() {
 
       {/* ─── HERO ─────────────────────────────────────────────────────────── */}
       <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-28">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="section-padding relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -303,21 +309,22 @@ export default function AboutUSPage() {
             </p>
 
             <div className="flex flex-wrap justify-center gap-4">
-              <a href="#story" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#0299b1] text-white text-sm font-medium hover:bg-[#05d8f5] transition-colors duration-300 group">
+              <a href="#story" className="btn-primary flex gap-3 items-center">
                 Our Story
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
               </a>
-              <a href="#contact" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-white/10 text-white/70 text-sm font-medium hover:border-[#0299b1]/30 hover:text-white transition-all duration-300">
+              <a href="#contact" className="btn-secondary flex gap-3 items-center">
                 Work With Us
               </a>
             </div>
           </motion.div>
         </div>
+
       </section>
 
       {/* ─── STATS BAR ────────────────────────────────────────────────────── */}
       <section className="relative py-12 border-y border-white/[0.04]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="section-padding">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-0">
             {stats.map((stat, i) => (
               <motion.div
@@ -340,7 +347,7 @@ export default function AboutUSPage() {
 
       {/* ─── STORY ────────────────────────────────────────────────────────── */}
       <section id="story" className="relative py-24 lg:py-32">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="section-padding relative z-10">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
@@ -424,7 +431,7 @@ export default function AboutUSPage() {
 
       {/* ─── VALUES ───────────────────────────────────────────────────────── */}
       <section className="relative py-24 lg:py-32">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="section-padding relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -450,7 +457,7 @@ export default function AboutUSPage() {
       </section>
 
       {/* ─── TIMELINE ─────────────────────────────────────────────────────── */}
-      <section className="relative py-24 lg:py-32">
+      {/* <section className="relative py-24 lg:py-32">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -471,11 +478,11 @@ export default function AboutUSPage() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* ─── TEAM ─────────────────────────────────────────────────────────── */}
       <section className="relative py-24 lg:py-32">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="section-padding relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -501,7 +508,7 @@ export default function AboutUSPage() {
       </section>
 
       {/* ─── CTA ──────────────────────────────────────────────────────────── */}
-      <section id="contact" className="relative py-24 lg:py-32">
+      {/* <section id="contact" className="relative py-24 lg:py-32">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -538,7 +545,7 @@ export default function AboutUSPage() {
             </div>
           </motion.div>
         </div>
-      </section>
+      </section> */}
 
       <div className="h-20" />
     </div>

@@ -31,8 +31,10 @@ const footerLinks = {
   Company: [
     { name: "About Us", href: "/about-us" },
     { name: "Contact Us", href: "/contact" },
+    { name: 'Investors', href: '/investors' },
     { name: "Privacy Policy", href: "/privacy-policy" },
     { name: "Terms of Service", href: "/terms-of-service" },
+
     // { name: "Our Team", href: "#" },
     // { name: "Careers", href: "#" },
     // { name: "Blog", href: "#" },

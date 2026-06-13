@@ -39,7 +39,7 @@ function FloatingCard({ icon: Icon, title, delay, position }) {
 
 export default function Hero() {
   return (
-    <section className="relative flex items-center overflowhidden pt-30">
+    <section className="relative flex items-center pt-30">
       {/* Background Effects */}
       <div className="absolute inset-0 bg-gradient-to-b from-dark via-dark to-secondary/20 z-0" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(2,153,177,0.15),_transparent_50%)] z-0" />

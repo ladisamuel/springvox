@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 
 import { motion, useInView } from "framer-motion";
+import { Building2 } from "lucide-react";
 
 const inquiryTypes = [
   "General Inquiry",
@@ -177,57 +178,45 @@ export default function ContactPage() {
     <div className="min-h-screen pt-20 bg-[#050d0f] text-white font-sans">
       {/* Hero Section */}
 
-      <div class="section-padding lg:max-w-[75%] border4 text-center mb-4  lg:text-left">
-        <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6 }}
-        >
+
+
+<div className="lg:max-w-7xl mx-auto pb-10 pt-20 px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex w-fit items-center gap-2 px-4 py-2 rounded-full glass mb-8"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center max-w-4xl mx-auto"
           >
-            <span className="text-sm text-gray-300">Contact Us</span>
-          </motion.div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#0299b1]/20 bg-[#0299b1]/5 mb-8"
+            >
+              <Building2 className="w-3.5 h-3.5 text-[#0299b1]" />
+              <span className="text-[#0299b1] text-xs font-semibold tracking-widest uppercase">Contact Us</span>
+            </motion.div>
 
-          <span className="text-primary text-sm font-semibold tracking-widest uppercase mb-4 block"></span>
-          <h2 className="text-3xl lg:text-5xl font-bold mb-6 leading-tight">
-            Let's Build Something <br class="hidden lg:block" />
-            <span className="text-gradient text3xl">Great Together</span>{" "}
-            {/* <span className="text-gradient text3xl">Excellence</span> */}
-          </h2>
-        </motion.div>
+            <h1 className="text-5xl sm:text-6xl lg:text-6xl font-bold mb-6 tracking-tight">
+              
+              <span className="text-white">Let's Build  </span>
+              <span className="bg-gradient-to-r from-[#0299b1] via-[#05d8f5] to-[#45919D] bg-clip-text text-transparent">
+                Something Great
+              </span>
+              <br />
+              <span className="text-white"> Together</span>
+            </h1>
 
-        <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="space-y-6 text-gray-400 leading-relaxed"
-        >
-          <p>
+            <p className="text-gray-400 text-lg leading-relaxed max-w-2xl mx-auto mb-10">
+                
             Tell us about your project, ask a question, or book a free
             consultation. Our team will get back to you within 24 hours.
-          </p>
-        </motion.div>
-      </div>
+            </p>
 
-      {/* <section className="px-8 md:px-16 lg:px-24 pt-16 pb-12">
-        <p className="text-xs font-semibold tracking-widest text-gray-400 uppercase mb-4 flex items-center gap-2">
-          <span className="inline-block w-8 h-px bg-gray-500"></span>
-          Contact Us
-        </p>
-        <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4">
-          Let's Build Something{" "}
-          <span className="text-[#0299b1]">Great Together</span>
-        </h1>
-        <p className="text-gray-400 text-base max-w-md leading-relaxed">
-          Tell us about your project, ask a question, or book a free
-          consultation. Our team will get back to you within 24 hours.
-        </p>
-      </section> */}
+          </motion.div>
+        </div>
 
+ 
       {/* Main Content */}
       <section className="px-8 md:px-16 lg:px-24 pb-20">
         <div className="flex flex-col lg:flex-row gap-8">

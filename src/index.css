@@ -11,6 +11,8 @@
     box-sizing: border-box;
   }
 
+  /* html { scroll-behavior: smooth; } */
+
   html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
@@ -46,6 +48,7 @@
     background: #0299b1;
   }
 }
+
 
 @layer components {
   .text-gradient {

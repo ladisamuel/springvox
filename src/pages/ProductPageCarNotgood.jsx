@@ -1,0 +1,517 @@
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { 
+  Zap, 
+  Shield, 
+  Phone, 
+  CheckCircle2, 
+  ArrowRight,
+  AlertTriangle, 
+  Info,
+  XCircle,
+  CheckCircle
+} from 'lucide-react';
+
+const products = [
+  {
+    id: 'rekalliq',
+    name: 'ReKallIQ',
+    subtitle: 'AI-Powered Enterprise Intelligence & Automation',
+    icon: Zap,
+    color: 'cyan',
+    status: 'Generally Available',
+    description: 'ReKallIQ is SpringVox\'s flagship enterprise intelligence platform. It combines large language models, cognitive automation, and real-time analytics to transform how organizations process information, make decisions, and automate workflows — at scale.',
+    features: [
+      'Natural language query across enterprise data',
+      'Intelligent process automation & orchestration',
+      'Real-time cognitive dashboards & reporting',
+      'Seamless ERP/CRM integration via APIs',
+      'Role-based access control & audit logs',
+      'On-premise or cloud deployment options'
+    ],
+    badges: ['Enterprise Analytics', 'Workflow Automation', 'Decision Intelligence', 'Data Consolidation'],
+    timeline: [
+      { time: '2:47:03 AM', event: 'Latency spike detected', detail: 'Dashboard queries crossed 600ms and climbing fast', type: 'warning' },
+      { time: '2:47:09 AM', event: 'Auto-scaling triggered', detail: 'Cognitive processing nodes scaled from 4 to 12 instances', type: 'info' },
+      { time: '2:47:11 AM', event: 'Alert rule fired', detail: 'p99 > 800ms on analytics API threshold breached for 30s', type: 'alert' },
+      { time: '2:47:15 AM', event: 'Team notified via Slack', detail: '#platform-alerts channel pinged', type: 'info' },
+      { time: '2:47:28 AM', event: 'Incident resolved', detail: 'Query cache warmed, latency normalized to 120ms', type: 'success' }
+    ],
+    alertCard: {
+      title: 'p99 spike on analytics-api',
+      metric: '1.36s',
+      threshold: '800ms',
+      severity: 'critical',
+      service: 'api-gateway'
+    }
+  },
+  {
+    id: 'aegisids',
+    name: 'AegisIDS',
+    subtitle: 'Enterprise Cybersecurity & Intrusion Detection System',
+    icon: Shield,
+    color: 'emerald',
+    status: 'Generally Available',
+    description: 'AegisIDS is a next-generation cybersecurity platform built to detect, respond to, and neutralize threats before they cause damage. With real-time behavioral analysis, threat intelligence feeds, and automated incident response.',
+    features: [
+      'Real-time network intrusion detection & prevention',
+      'Behavioral anomaly detection with ML models',
+      'Automated threat response playbooks',
+      'Compliance reporting (SOC2, ISO 27001, GDPR)',
+      'Zero-trust architecture enforcement',
+      '24/7 threat intelligence feed integration'
+    ],
+    badges: ['Network Security', 'Threat Intelligence', 'Compliance', 'Incident Response'],
+    timeline: [
+      { time: '2:47:03 AM', event: 'Suspicious traffic detected', detail: 'Outbound connection to known C2 server from host-42', type: 'warning' },
+      { time: '2:47:05 AM', event: 'Behavioral analysis triggered', detail: 'ML model flagged anomalous process tree pattern', type: 'info' },
+      { time: '2:47:08 AM', event: 'Alert rule fired', detail: 'Critical threat signature match on endpoint protection', type: 'alert' },
+      { time: '2:47:10 AM', event: 'Auto-isolation executed', detail: 'Host-42 network segment quarantined automatically', type: 'success' },
+      { time: '2:47:22 AM', event: 'Threat neutralized', detail: 'Malicious process terminated, forensic snapshot captured', type: 'success' }
+    ],
+    alertCard: {
+      title: 'Critical threat on endpoint-42',
+      metric: 'Severity 9.8',
+      threshold: '7.0',
+      severity: 'critical',
+      service: 'aegis-engine'
+    }
+  },
+  {
+    id: 'truekall',
+    name: 'TrueKall',
+    subtitle: 'Cloud-Native Call Center & VoIP Communication Platform',
+    icon: Phone,
+    color: 'blue',
+    status: 'Generally Available',
+    description: 'TrueKall reimagines enterprise communications with a modern, cloud-native VoIP and call center platform. Built for reliability and scale, with intelligent routing, real-time analytics, and seamless CRM integration.',
+    features: [
+      'Enterprise-grade VoIP with 99.99% uptime SLA',
+      'Intelligent call routing & IVR automation',
+      'Real-time agent monitoring & analytics',
+      'Omnichannel: voice, chat, SMS, email',
+      'CRM integration (Salesforce, HubSpot, custom)',
+      'Scalable from 10 to 10,000+ agents'
+    ],
+    badges: ['Call Centers', 'Enterprise VoIP', 'Customer Support', 'Remote Teams'],
+    timeline: [
+      { time: '2:47:03 AM', event: 'Call drop spike detected', detail: 'SIP trunk failure rate crossed 5% on us-east-1', type: 'warning' },
+      { time: '2:47:06 AM', event: 'Failover initiated', detail: 'Traffic rerouted to us-west-2 backup cluster', type: 'info' },
+      { time: '2:47:09 AM', event: 'Alert rule fired', detail: 'PSTN gateway health check failed for 45s', type: 'alert' },
+      { time: '2:47:14 AM', event: 'Auto-scaling triggered', detail: 'Media server pool expanded from 8 to 20 nodes', type: 'info' },
+      { time: '2:47:31 AM', event: 'Service restored', detail: 'Call completion rate back to 99.97%, QoS nominal', type: 'success' }
+    ],
+    alertCard: {
+      title: 'SIP failure on us-east-1',
+      metric: '5.2% drop rate',
+      threshold: '1.0%',
+      severity: 'critical',
+      service: 'sip-gateway'
+    }
+  }
+];
+
+const colorMap = {
+  cyan: {
+    text: 'text-cyan-400',
+    bg: 'bg-cyan-500/10',
+    border: 'border-cyan-500/20',
+    badge: 'bg-cyan-950/50 text-cyan-400 border-cyan-500/30',
+    dot: 'bg-cyan-400',
+    alertBg: 'bg-cyan-950/30',
+    alertBorder: 'border-cyan-500/30',
+    alertText: 'text-cyan-400',
+    btn: 'bg-cyan-600 hover:bg-cyan-500'
+  },
+  emerald: {
+    text: 'text-emerald-400',
+    bg: 'bg-emerald-500/10',
+    border: 'border-emerald-500/20',
+    badge: 'bg-emerald-950/50 text-emerald-400 border-emerald-500/30',
+    dot: 'bg-emerald-400',
+    alertBg: 'bg-emerald-950/30',
+    alertBorder: 'border-emerald-500/30',
+    alertText: 'text-emerald-400',
+    btn: 'bg-emerald-600 hover:bg-emerald-500'
+  },
+  blue: {
+    text: 'text-blue-400',
+    bg: 'bg-blue-500/10',
+    border: 'border-blue-500/20',
+    badge: 'bg-blue-950/50 text-blue-400 border-blue-500/30',
+    dot: 'bg-blue-400',
+    alertBg: 'bg-blue-950/30',
+    alertBorder: 'border-blue-500/30',
+    alertText: 'text-blue-400',
+    btn: 'bg-blue-600 hover:bg-blue-500'
+  }
+};
+
+const typeConfig = {
+  warning: { dot: 'bg-amber-500 border-amber-500/50', text: 'text-amber-400', Icon: AlertTriangle },
+  info: { dot: 'bg-slate-500 border-slate-500/50', text: 'text-slate-400', Icon: Info },
+  alert: { dot: 'bg-red-500 border-red-500/50 animate-pulse', text: 'text-red-400', Icon: XCircle },
+  success: { dot: 'bg-emerald-500 border-emerald-500/50', text: 'text-emerald-400', Icon: CheckCircle }
+};
+
+const TimelineItem = ({ item, isLast }) => {
+  const config = typeConfig[item.type];
+  const Icon = config.Icon;
+
+  return (
+    <div className="flex gap-4 group">
+      <div className="flex flex-col items-center flex-shrink-0">
+        <div className={`w-3 h-3 rounded-full border-2 ${config.dot} flex items-center justify-center`}>
+          <div className="w-1 h-1 rounded-full bg-white/80" />
+        </div>
+        {!isLast && <div className="w-px flex-1 min-h-[40px] bg-slate-800 group-hover:bg-slate-700 transition-colors" />}
+      </div>
+      <div className="pb-6 flex-1">
+        <div className="flex items-baseline gap-3 mb-1">
+          <span className="text-xs font-mono text-slate-500 tabular-nums">{item.time}</span>
+          <span className={`text-sm font-semibold ${config.text}`}>{item.event}</span>
+        </div>
+        <p className="text-xs text-slate-500 font-mono leading-relaxed">{item.detail}</p>
+      </div>
+    </div>
+  );
+};
+
+const AlertCard = ({ alert, color }) => (
+  <div className={`relative rounded-lg border ${color.alertBorder} ${color.alertBg} p-5 backdrop-blur-sm shadow-lg`}>
+    <div className="flex items-center gap-2 mb-4">
+      <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+      <span className="text-[10px] font-mono font-bold tracking-[0.15em] text-red-400 uppercase">Alert Triggered</span>
+    </div>
+    <h4 className="text-base font-bold text-white mb-4 tracking-tight">{alert.title}</h4>
+    <div className="grid grid-cols-2 gap-4 text-xs font-mono">
+      <div>
+        <p className="text-slate-500 mb-1 uppercase tracking-wider text-[10px]">Current</p>
+        <p className={`font-bold text-lg ${color.alertText}`}>{alert.metric}</p>
+      </div>
+      <div>
+        <p className="text-slate-500 mb-1 uppercase tracking-wider text-[10px]">Threshold</p>
+        <p className="text-slate-400 font-medium">{alert.threshold}</p>
+      </div>
+      <div>
+        <p className="text-slate-500 mb-1 uppercase tracking-wider text-[10px]">Severity</p>
+        <p className="text-red-400 font-bold uppercase tracking-wider">{alert.severity}</p>
+      </div>
+      <div>
+        <p className="text-slate-500 mb-1 uppercase tracking-wider text-[10px]">Service</p>
+        <p className="text-slate-400 font-medium">{alert.service}</p>
+      </div>
+    </div>
+  </div>
+);
+
+const ProductSlide = ({ product, index, total }) => {
+  const colors = colorMap[product.color];
+  const Icon = product.icon;
+
+  return (
+    <div className="h-full w-full bg-[#0a0f14]">
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
+        style={{
+          backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+          backgroundSize: '40px 40px'
+        }}
+      />
+      
+      <div className="h-full w-full flex items-center pl-24 lg:pl-40 pr-6 lg:pr-16 py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center max-w-7xl mx-auto w-full">
+          
+          {/* Left: Product Info */}
+          <div className="space-y-6 lg:space-y-8">
+            <div>
+              <div className="flex items-center gap-3 mb-5">
+                <div className={`w-12 h-12 rounded-xl ${colors.bg} ${colors.border} border flex items-center justify-center shadow-lg`}>
+                  <Icon className={`w-6 h-6 ${colors.text}`} />
+                </div>
+                <span className={`text-xs font-bold tracking-[0.15em] uppercase px-4 py-1.5 rounded-full border ${colors.badge}`}>
+                  {product.status}
+                </span>
+              </div>
+              
+              <h2 className="text-4xl lg:text-6xl font-bold text-white mb-3 tracking-tight leading-none">
+                {product.name}
+              </h2>
+              <p className={`text-sm lg:text-base font-semibold ${colors.text} mb-5`}>
+                {product.subtitle}
+              </p>
+              <p className="text-slate-400 leading-relaxed text-sm lg:text-base max-w-lg">
+                {product.description}
+              </p>
+            </div>
+
+            <div className="flex flex-wrap gap-2">
+              {product.badges.map((badge, i) => (
+                <span key={i} className="px-3 py-1.5 rounded-full text-xs font-medium bg-slate-800/80 text-slate-400 border border-slate-700/50">
+                  {badge}
+                </span>
+              ))}
+            </div>
+
+            <div className="space-y-1">
+              <p className="text-xs font-bold tracking-[0.15em] text-slate-500 uppercase mb-3">Key Features</p>
+              {product.features.map((feature, i) => (
+                <div key={i} className="flex items-start gap-3 py-2">
+                  <div className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center">
+                    <CheckCircle2 className="w-3 h-3 text-slate-500" />
+                  </div>
+                  <span className="text-slate-300 text-sm">{feature}</span>
+                </div>
+              ))}
+            </div>
+
+            <div className="flex flex-wrap items-center gap-4 pt-2">
+              <a href="#" className={`inline-flex items-center px-6 py-3 rounded-lg ${colors.btn} text-white text-sm font-semibold transition-all duration-200 shadow-lg hover:shadow-xl`}>
+                Request {product.name} Demo
+              </a>
+              <a href="#" className="inline-flex items-center text-slate-400 hover:text-white text-sm font-medium transition-colors duration-200 group">
+                View Documentation 
+                <ArrowRight className="w-4 h-4 ml-1.5 group-hover:translate-x-1 transition-transform" />
+              </a>
+            </div>
+          </div>
+
+          {/* Right: WatchUp-style Timeline */}
+          <div className="relative">
+            <div className="flex items-center justify-between mb-6">
+              <span className="text-xs font-mono text-slate-500 font-bold tracking-wider">
+                {index + 1} OF {total}
+              </span>
+              <span className="text-xs font-mono text-slate-500 tabular-nums">
+                {product.timeline[0].time}
+              </span>
+            </div>
+            
+            <div className="relative bg-[#0d1117]/60 rounded-xl border border-slate-800/60 p-6 lg:p-8 backdrop-blur-sm">
+              <div className="mb-8 lg:absolute lg:top-6 lg:right-6 lg:mb-0 lg:w-64 z-10">
+                <AlertCard alert={product.alertCard} color={colors} />
+              </div>
+              
+              <div className="lg:mt-32">
+                <p className="text-xs font-mono text-slate-500 mb-5 uppercase tracking-[0.15em] font-bold">Incident Timeline</p>
+                <div className="space-y-0">
+                  {product.timeline.map((item, i) => (
+                    <TimelineItem 
+                      key={i} 
+                      item={item} 
+                      isLast={i === product.timeline.length - 1}
+                    />
+                  ))}
+                </div>
+              </div>
+              
+              <div className="mt-6 pt-5 border-t border-slate-800/50">
+                <p className="text-xs text-slate-500 font-mono leading-relaxed">
+                  <span className="text-emerald-400 font-semibold">Resolved</span> in 28 seconds. Scroll through each moment {product.name} caught it.
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const SpringVoxScrollCarousel = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const wrapperRef = useRef(null);
+  const activeIndexRef = useRef(0);
+
+  const totalSlides = products.length;
+    const tabs = ['ReKallIQ', 'AegisIDS', 'TrueKall', 'Coming Soon'];
+
+  const handleScroll = useCallback(() => {
+    if (!wrapperRef.current) return;
+    const rect = wrapperRef.current.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+    
+    const isInView = rect.top < windowHeight && rect.bottom > 0;
+    setIsVisible(isInView);
+    
+    if (isInView && rect.height > windowHeight) {
+      const scrolled = Math.max(0, -rect.top);
+      const totalScrollable = rect.height - windowHeight;
+      const rawProgress = Math.max(0, Math.min(1, scrolled / totalScrollable));
+      setProgress(rawProgress);
+      
+      const newIndex = Math.min(totalSlides - 1, Math.floor(rawProgress * totalSlides));
+      
+      if (newIndex !== activeIndexRef.current) {
+        activeIndexRef.current = newIndex;
+        setActiveIndex(newIndex);
+      }
+    }
+  }, [totalSlides]);
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll, { passive: true });
+    handleScroll();
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
+  }, [handleScroll]);
+
+  const scrollToSlide = (index) => {
+    if (!wrapperRef.current) return;
+    const windowHeight = window.innerHeight;
+    const wrapperHeight = wrapperRef.current.offsetHeight;
+    const targetScroll = wrapperRef.current.offsetTop + (wrapperHeight - windowHeight) * (index / (totalSlides - 1));
+    window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+  };
+
+  return (
+    <div className="">
+      
+      <section className="relative pt-20 pb-16 lg:pt-32 lg:pb-24 px-4 sm:px-6 lg:px-8 xl:px-12 max-w-7xl mx-auto">
+        <div className="max-w-3xl">
+          <p className="text-xs font-semibold tracking-[0.2em] text-cyan-400 uppercase mb-4">— Our Products</p>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight leading-tight">
+            Platforms Built for <span className="text-cyan-400">Enterprise Scale</span>
+          </h1>
+          <p className="text-lg text-slate-400 leading-relaxed mb-8 max-w-xl">
+            Three flagship products — and more in development — each engineered to solve critical enterprise challenges with intelligence, security, and scale.
+          </p>
+          
+          <div className="flex flex-wrap gap-3">
+            {tabs.map((tab) => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-200 border ${
+                  activeTab === tab 
+                    ? 'bg-slate-800 border-slate-600 text-white' 
+                    : 'bg-transparent border-slate-700 text-slate-400 hover:border-slate-500 hover:text-slate-300'
+                }`}
+              >
+                {tab}
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+    <div 
+      ref={wrapperRef} 
+      className="relative bg-[#0a0f14]" 
+      style={{ height: `${totalSlides * 100}vh` }}
+    >
+      {/* Fixed Carousel Container */}
+      <div 
+        className={`fixed inset-0 z-50 bg-[#0a0f14] transition-opacity duration-700 ${
+          isVisible ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        }`}
+      >
+        {/* Progress Bar - Left Side - Full Height */}
+        <div className="absolute left-6 lg:left-12 top-1/2 -translate-y-1/2 h-[70vh] z-50 flex flex-col justify-between">
+          {/* Background Track */}
+          <div className="absolute left-[5px] top-0 bottom-0 w-px bg-slate-800/80" />
+          
+          {/* Progress Fill */}
+          <div 
+            className="absolute left-[5px] top-0 w-px bg-cyan-500 transition-all duration-500 ease-out shadow-[0_0_10px_rgba(6,182,212,0.5)]"
+            style={{ height: `${progress * 100}%` }}
+          />
+          
+          {/* Points with Product Names */}
+          <div className="relative h-full flex flex-col justify-between py-1">
+            {products.map((product, i) => {
+              const isActive = i === activeIndex;
+              const isPast = i < activeIndex;
+              const pColors = colorMap[product.color];
+              
+              return (
+                <button
+                  key={product.id}
+                  onClick={() => scrollToSlide(i)}
+                  className="relative flex items-center gap-4 group py-3 cursor-pointer"
+                >
+                  <div className={`w-3 h-3 rounded-full border-2 transition-all duration-500 flex-shrink-0 ${
+                    isActive 
+                      ? `${pColors.dot} border-transparent scale-150 shadow-lg` 
+                      : isPast 
+                        ? 'bg-slate-800 border-slate-600' 
+                        : 'bg-slate-900 border-slate-700 group-hover:border-slate-500'
+                  }`}>
+                    {isActive && <div className="w-full h-full rounded-full animate-ping bg-cyan-400/30" />}
+                  </div>
+                  
+                  <span className={`text-xs font-bold tracking-[0.1em] uppercase transition-all duration-500 whitespace-nowrap ${
+                    isActive 
+                      ? 'text-white opacity-100 translate-x-0' 
+                      : isPast 
+                        ? 'text-slate-500 opacity-70' 
+                        : 'text-slate-600 opacity-0 -translate-x-3 group-hover:opacity-40 group-hover:translate-x-0'
+                  }`}>
+                    {product.name}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Slides Container */}
+        <div className="relative h-full w-full overflow-hidden">
+          {products.map((product, i) => {
+            const isActive = i === activeIndex;
+            const isPrev = i < activeIndex;
+            
+            return (
+              <div 
+                key={product.id}
+                className="absolute inset-0 transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] will-change-transform"
+                style={{
+                  zIndex: i,
+                  transform: isActive ? 'translateY(0)' : isPrev ? 'translateY(-15%)' : 'translateY(100%)',
+                  opacity: isActive ? 1 : isPrev ? 0 : 1,
+                  pointerEvents: isActive ? 'auto' : 'none',
+                }}
+              >
+                <ProductSlide product={product} index={i} total={totalSlides} />
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Bottom Indicators */}
+        <div className="absolute bottom-8 right-8 lg:right-16 z-50 flex items-center gap-4">
+          <div className="flex items-center gap-2">
+            {products.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => scrollToSlide(i)}
+                className={`h-1 rounded-full transition-all duration-500 ${
+                  i === activeIndex ? 'w-8 bg-cyan-400' : 'w-1.5 bg-slate-700 hover:bg-slate-600'
+                }`}
+              />
+            ))}
+          </div>
+          <span className="text-xs font-mono text-slate-500 tracking-wider">
+            {String(activeIndex + 1).padStart(2, '0')} / {String(totalSlides).padStart(2, '0')}
+          </span>
+        </div>
+
+        {/* Scroll Hint */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center gap-2 opacity-50">
+          <span className="text-[10px] font-mono text-slate-500 uppercase tracking-widest">Scroll</span>
+          <div className="w-5 h-8 rounded-full border border-slate-700 flex items-start justify-center p-1.5">
+            <div className="w-1 h-2 bg-cyan-400 rounded-full animate-bounce" />
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+  );
+};
+
+export default SpringVoxScrollCarousel;

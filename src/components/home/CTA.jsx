@@ -27,8 +27,12 @@ export default function CTA() {
           transition={{ duration: 0.8 }}
           className="max-w-4xl mx-auto text-center"
         >
+                        <span className="inline-flex w-fit items-center gap-2 px-4 py-2 rounded-full glass text-sm text-gray-300">
+                          <span>Get Started Today</span>
+                        </span>
+          
           <span className="text-primary text-sm font-semibold tracking-widest uppercase mb-6 block">
-            Get Started Today
+            
           </span>
 
           <h2 className="text-4xl lg:text-6xl font-bold mb-6 leading-tight">
