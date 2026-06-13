@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, ChevronRight, ExternalLink } from 'lucide-react'
 import logo from '../assets/logo/springvox-logo-light.png'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 const navLinks = [
+  { name: 'Services', href: '/#services' },
   { name: 'About us', href: '/about-us' },
   { name: 'Products', href: '/products' },
-  { name: 'Services', href: '/#services' },
   // { name: 'Investors', href: '/investors' },
   // { name: 'About', href: '#about' },
   { name: 'Contact', href: '/contact' },
@@ -16,6 +16,7 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const navigate = useNavigate()
+  const { hash } = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,6 +26,16 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+
+
+  useEffect(() => {
+    if (!hash) return;
+
+    const element = document.querySelector(hash);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [hash]);
   return (
     <>
       <motion.nav
@@ -60,15 +71,15 @@ export default function Navbar() {
 
           <div className="hidden lg:flex items-center gap-8">
             {navLinks.map((link) => (
-              link?.href?.startsWith('/#') ?
-              <a
-                key={link.name}
-                href={link.href}
-                className="relative text-sm text-gray-300 hover:text-white transition-colors duration-300 group py-2"
-              >
-                {link.name}
-                <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-primary to-cyan-400 group-hover:w-full transition-all duration-300" />
-              </a> :
+              // link?.href?.startsWith('/#') ?
+              // <a
+              //   key={link.name}
+              //   href={link.href}
+              //   className="relative text-sm text-gray-300 hover:text-white transition-colors duration-300 group py-2"
+              // >
+              //   {link.name}
+              //   <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-primary to-cyan-400 group-hover:w-full transition-all duration-300" />
+              // </a> :
               <Link
                 key={link.name}
                 to={link.href}
