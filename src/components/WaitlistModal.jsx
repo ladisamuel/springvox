@@ -316,7 +316,7 @@ export default function WaitlistModal({ isOpen, onClose }) {
                   explore ReKallIQ on our product site.
                 </p>
                 <a
-                  href="https://springvox-knowledge-ai.vercel.app/"
+                  href={import.meta.env.VITE_REKALL_IQ_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-6 py-3 text-sm font-medium text-white bg-[#0299b1] rounded-xl hover:bg-[#017a8f] transition-colors"

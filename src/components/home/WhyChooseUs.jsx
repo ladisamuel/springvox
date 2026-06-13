@@ -245,9 +245,9 @@ export default function WhyChooseUs() {
 
       {/* Content */}
       <div className="relative z-10 section-padding ">
-        {/* Header */} 
+        {/* Header */}
 
-        <div class="lg:max-w-[75%] border4 text-center mb-4  lg:text-left">
+        <div className="lg:max-w-[75%] border4 text-center mb-4  lg:text-left">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
@@ -264,7 +264,7 @@ export default function WhyChooseUs() {
 
             <span className="text-primary text-sm font-semibold tracking-widest uppercase mb-4 block"></span>
             <h2 className="text-3xl lg:text-5xl font-bold mb-6 leading-tight">
-              Built for <br class="hidden lg:block" />
+              Built for <br className="hidden lg:block" />
               <span className="text-gradient text3xl">Enterprise</span>{" "}
               <span className="text-gradient text3xl">Excellence</span>
             </h2>
@@ -277,8 +277,8 @@ export default function WhyChooseUs() {
             className="space-y-6 text-gray-400 leading-relaxed"
           >
             <p>
-            We combine technical depth, design excellence, and strategic
-            thinking to deliver outcomes that move the needle.
+              We combine technical depth, design excellence, and strategic
+              thinking to deliver outcomes that move the needle.
             </p>
           </motion.div>
         </div>

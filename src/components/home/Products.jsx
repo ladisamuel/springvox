@@ -39,7 +39,7 @@ const products = [
     ],
     primaryCta: {
       text: "Request Demo / See How It Works",
-      href: "https://springvox-knowledge-ai.vercel.app/",
+      href: import.meta.env.VITE_REKALL_IQ_URL,
       external: true,
     },
     secondaryCta: null,
@@ -584,72 +584,50 @@ export default function Products() {
       <div className="section-padding relative z-10 mx-auto">
         {/* Header */}
 
+        <div className="lg:max-w-[75%] border4 text-center mb-4  lg:text-left">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8 }}
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="inline-flex w-fit items-center gap-2 px-4 py-2 rounded-full glass mb-8"
+            >
+              <span className="text-sm text-gray-300">Our Products</span>
+            </motion.div>
 
-                  <div class="lg:max-w-[75%] border4 text-center mb-4  lg:text-left">
-                    <motion.div
-                      initial={{ opacity: 0, x: -30 }}
-                      animate={isInView ? { opacity: 1, x: 0 } : {}}
-                      transition={{ duration: 0.8 }}
-                    >
-        
-                                  <motion.div
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.6 }}
-                                    className="inline-flex w-fit items-center gap-2 px-4 py-2 rounded-full glass mb-8"
-                                  >
-                                    <span className="text-sm text-gray-300">Our Products</span>
-                                  </motion.div>
-        
-                      <span className="text-primary text-sm font-semibold tracking-widest uppercase mb-4 block">
-                        
-                      </span>
-                      <h2 className="text-3xl lg:text-5xl font-bold mb-6 leading-tight">
-                        Innovative Platforms{' '}
-                        <br class="hidden lg:block" />
-                        <span className="text-gradient text3xl">We've Built</span>{' '}
-                        {/* <span className="text-gradient text3xl">Company</span> */}
-                      </h2>
-                    </motion.div>
-        
-                    <motion.div
-                      initial={{ opacity: 0, x: -30 }}
-                      animate={isInView ? { opacity: 1, x: 0 } : {}}
-                      transition={{ duration: 0.8, delay: 0.2 }}
-                      className="space-y-6 text-gray-400 leading-relaxed"
-                    >
-                      <p>
-            Flagship products designed for enterprise performance, security, and
-            scale — built in-house by SpringVox engineers.
-                      </p>
-                      {/* <p>
+            <span className="text-primary text-sm font-semibold tracking-widest uppercase mb-4 block"></span>
+            <h2 className="text-3xl lg:text-5xl font-bold mb-6 leading-tight">
+              Innovative Platforms <br className="hidden lg:block" />
+              <span className="text-gradient text3xl">We've Built</span>{" "}
+              {/* <span className="text-gradient text3xl">Company</span> */}
+            </h2>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="space-y-6 text-gray-400 leading-relaxed"
+          >
+            <p>
+              Flagship products designed for enterprise performance, security,
+              and scale — built in-house by SpringVox engineers.
+            </p>
+            {/* <p>
                         Our mission is to harness the power of emerging technologies to solve real-world 
                         challenges — making businesses smarter, faster, and more competitive in the digital age.
                       </p> */}
-                    </motion.div>
-        
-                    {/* <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={isInView ? { opacity: 1, y: 0 } : {}}
-                      transition={{ duration: 0.8, delay: 0.4 }}
-                      className="flex gap-4 mt-8"
-                    >
-                      <a href="#services" className="btn-primary flex items-center gap-2">
-                        Our Story
-                        <ArrowRight className="w-4 h-4" />
-                      </a>
-                      <a href="#contact" className="btn-secondary flex items-center gap-2">
-                        Meet the Team
-                        <ArrowRight className="w-4 h-4" />
-                      </a>
-                    </motion.div> */}
-                  </div>
-
+          </motion.div>
  
+        </div>
+
         {/* Tabs */}
         <div className="flex flex-wrap justify-center lg:justify-start gap-2 sm:gap-3 mt-2 mb-10 sm:mb-12">
-
-        {/* <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-10 sm:mb-12"> */}
+          {/* <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-10 sm:mb-12"> */}
           {products.map((tab) => {
             const isActive = activeTab === tab.id;
             return (

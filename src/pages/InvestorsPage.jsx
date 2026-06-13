@@ -20,6 +20,7 @@ import {
   Building2 ,
 } from "lucide-react";
 import { Play } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const metrics = [
   {
@@ -211,10 +212,10 @@ export default function InvestorsPage() {
                 <Download className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                 Download Investor Kit
               </button>
-              <button href="#contact" className="btn-secondary flex gap-3 items-center">
+              <Link to="/contact" className="btn-secondary flex gap-3 items-center">
                   <Mail className="w-4 h-4" /> Contact IR Team
                 
-              </button>
+              </Link>
             </div>
           </motion.div>
         </div>
@@ -831,12 +832,12 @@ export default function InvestorsPage() {
 
             
             <div className="flex flex-wrap justify-center gap-4">
-              <button href="#story" className="btn-primary flex gap-3 items-center">
+              {/* <button href="#story" className="btn-primary flex gap-3 items-center">
                 Request Allocation
-              </button>
-              <button href="#contact" className="btn-secondary flex gap-3 items-center">
+              </button> */}
+              <Link to="/contact" className="btn-primary flex gap-3 items-center">
                 Speak with IR Team
-              </button>
+              </Link>
             </div>
  
           </div>

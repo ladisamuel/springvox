@@ -14,7 +14,7 @@ import logo from "../assets/logo/springvox-logo-light.png";
 
 const footerLinks = {
   Products: [
-    { name: "ReKallIQ", href: "https://springvox-knowledge-ai.vercel.app/" },
+    { name: "ReKallIQ", href: import.meta.env.VITE_REKALL_IQ_URL },
     { name: "SpringVox PBX", href: "#" },
     { name: "Coming Soon", href: "#" },
     // { name: 'AegisIDS', href: '#' },
@@ -31,7 +31,7 @@ const footerLinks = {
   Company: [
     { name: "About Us", href: "/about-us" },
     { name: "Contact Us", href: "/contact" },
-    { name: 'Investors', href: '/investors' },
+    { name: "Investors", href: "/investors" },
     { name: "Privacy Policy", href: "/privacy-policy" },
     { name: "Terms of Service", href: "/terms-of-service" },
 
@@ -44,7 +44,7 @@ const footerLinks = {
     { name: "Get in Touch", href: "/contact" },
     { name: "Support", href: "/contact" },
     { name: "Book Consultation", href: "/contact" },
-    { name: "Request Demo", href: "/#products" },
+    { name: "Request Demo", href: "/products" },
   ],
 };
 
@@ -67,7 +67,7 @@ export default function Footer() {
           <div className="lg:col-span-2">
             <Link to="/" className="flex items-center gap-2 group mb-6">
               <div className="relative w10 h-10 flex items-center justify-center">
-                <img src={logo} class="h-full" alt="SpringVox Logo" />
+                <img src={logo} className="h-full" alt="SpringVox Logo" />
                 {/* 
             
                           <div className="absolute inset-0 bg-primary/20 rounded-xl rotate-45 group-hover:rotate-90 transition-transform duration-500" />

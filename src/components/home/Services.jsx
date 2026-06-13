@@ -434,9 +434,9 @@ export default function Services2() {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_rgba(1,66,76,0.2),_transparent_50%)] z-0" />
 
       <div className="">
-        {/* Header */} 
+        {/* Header */}
 
-        <div class="section-padding">
+        <div className="section-padding">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
@@ -453,7 +453,7 @@ export default function Services2() {
 
             <span className="text-primary text-sm font-semibold tracking-widest uppercase mb-4 block"></span>
             <h2 className="text-3xl lg:text-5xl font-bold mb-6 leading-tight">
-              Technology Services <br class="hidden lg:block" />
+              Technology Services <br className="hidden lg:block" />
               <span className="text-gradient text3xl">End-to-End</span>{" "}
             </h2>
           </motion.div>

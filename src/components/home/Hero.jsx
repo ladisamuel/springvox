@@ -4,6 +4,7 @@ import { ArrowRight, Play, Zap, Shield, Globe } from "lucide-react";
 import Scene3D from "../Scene3D";
 import { ParticleBackground } from "../../utils/ParticleBackground";
 import { ThreeScene } from "../../utils/helper";
+import { Link } from "react-router-dom";
 
 function FloatingCard({ icon: Icon, title, delay, position }) {
   return (
@@ -64,7 +65,7 @@ export default function Hero() {
         <div className="grid grid-cols-1 lg:grid-cols-[9fr_3fr] lg:gap-16 items-center">
           {/* Left Column - Text */}
           {/* <div className="max-w-2xl flex flex-col items-center justify-center border-4"> */}
-          <div class="text-center lg:text-left">
+          <div className="text-center lg:text-left">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -83,9 +84,9 @@ export default function Hero() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="text-4xl sm:text5xl lg:text-6xl font-bold - xl:text7xl tracking-tight leading-tight leading[1.1] mb-6"
             >
-              Building Intelligent <br class="block lg:hidden" />
+              Building Intelligent <br className="block lg:hidden" />
               <span className="text-gradient">Software Solutions</span>
-              <br class="block md:hidden" />{" "}
+              <br className="block md:hidden" />{" "}
               <span className="text-white/80">for the Future</span>
             </motion.h1>
 
@@ -106,23 +107,23 @@ export default function Hero() {
               transition={{ duration: 0.8, delay: 0.6 }}
               className="flex flex-wrap gap-4 mb-16 items-center justify-center lg:justify-start"
             >
-              <a
-                href="#products"
+              <Link
+                to="#products"
                 className="btn-primary flex items-center gap-2"
               >
                 Explore Solutions
                 <ArrowRight className="w-4 h-4" />
-              </a>
-              <a
-                href="#contact"
+              </Link>
+              <Link 
+                to="/contact"
                 className="btn-secondary flex items-center gap-2"
               >
                 <Play className="w-4 h-4" />
                 Request Consultation
-              </a>
-              <a href="#products" className="btn-secondary">
+              </Link>
+              <Link to="/products" className="btn-secondary">
                 View Products
-              </a>
+              </Link>
             </motion.div>
 
             {/* Stats */}

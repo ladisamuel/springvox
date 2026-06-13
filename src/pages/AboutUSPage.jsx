@@ -5,6 +5,7 @@ import {
   ArrowRight, Sparkles, MapPin, Calendar, ChevronRight, Building2,
   Cpu, Rocket, Lightbulb, Handshake, CheckCircle2
 } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 const stats = [
@@ -313,9 +314,9 @@ export default function AboutUSPage() {
                 Our Story
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
               </a>
-              <a href="#contact" className="btn-secondary flex gap-3 items-center">
+              <Link href="/contact" className="btn-secondary flex gap-3 items-center">
                 Work With Us
-              </a>
+              </Link>
             </div>
           </motion.div>
         </div>

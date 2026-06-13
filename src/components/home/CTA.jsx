@@ -1,6 +1,7 @@
 import React, { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { ArrowRight, Calendar, Monitor } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 export default function CTA() {
   const sectionRef = useRef(null)
@@ -47,18 +48,18 @@ export default function CTA() {
           </p>
 
           <div className="flex flex-wrap justify-center gap-4 mb-8">
-            <a href="#contact" className="btn-primary flex items-center gap-2 ">
+            <Link to="/contact" className="btn-primary flex items-center gap-2 ">
               Start a Project
               <ArrowRight className="w-5 h-5" />
-            </a>
-            <a href="#contact" className="btn-secondary flex items-center gap-2 ">
+            </Link>
+            <Link to="/contact" className="btn-secondary flex items-center gap-2 ">
               <Calendar className="w-5 h-5" />
               Book a Consultation
-            </a>
-            <a href="#products" className="btn-secondary flex items-center gap-2 ">
+            </Link>
+            <Link to="products" className="btn-secondary flex items-center gap-2 ">
               <Monitor className="w-5 h-5" />
               Request a Demo
-            </a>
+            </Link>
           </div>
 
           <p className="text-gray-500 text-sm">

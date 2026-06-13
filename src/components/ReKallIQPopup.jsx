@@ -84,7 +84,7 @@ export default function ReKallIQPopup({ onOpenWaitlist }) {
 
             <div className="flex items-center gap-3">
               <a
-                href="https://springvox-knowledge-ai.vercel.app/"
+                href={import.meta.env.VITE_REKALL_IQ_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-[#0299b1] text-white text-sm px-3 py-1.5 rounded-md hover:bg-[#017a8f] transition-colors"

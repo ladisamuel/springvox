@@ -302,7 +302,7 @@ function ReKalliqPanel() {
 
         <div className="flex flex-wrap gap-4">
           <a
-            href="https://springvox-knowledge-ai.vercel.app/"
+            href={import.meta.env.VITE_REKALL_IQ_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-6 py-3 text-sm font-medium text-white bg-[#0299b1] rounded-xl hover:bg-[#017a8f] transition-all duration-300 shadow-lg shadow-[#0299b1]/20"
