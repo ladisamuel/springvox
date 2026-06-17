@@ -88,23 +88,24 @@ export default function Navbar() {
           </div>
 
           <div className="hidden lg:flex items-center gap-4">
-            <a
-              href="/contact"
+            <Link
+              to="/contact"
               className="btn-primary flex items-center gap-2 text-sm"
             >
               Get Started
               <ChevronRight className="w-4 h-4" />
-            </a>
+            </Link>
 
-            <Link
+            <a
               to={import.meta.env.VITE_REKALL_IQ_URL}
+                target="_blank"
               className="btn-secondary bg-white text-gray-900 border-none flex items-center gap-2 text-sm"
             >
               <span>
                 Try Rekall<span className="text-[#14b8a6] p-0">-IQ</span>
               </span>
               <ExternalLink className="w-4 h-4" />
-            </Link>
+            </a>
           </div>
 
           <button
@@ -156,6 +157,7 @@ export default function Navbar() {
               </motion.a>
               <motion.a
                 href={import.meta.env.VITE_REKALL_IQ_URL}
+                target="_blank"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 }}
