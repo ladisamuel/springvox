@@ -527,7 +527,7 @@ export default function About() {
               </p>
 
               <div className="flex flex-wrap justify-center gap-4">
-                <a href="mailto:hello@springvox.com" className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-[#0299b1] text-white text-sm font-medium hover:bg-[#05d8f5] transition-colors duration-300 group shadow-lg shadow-[#0299b1]/20">
+                <a href={`mailto:${import.meta.env.VITE_EMAIL_CONTACT}`} className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-[#0299b1] text-white text-sm font-medium hover:bg-[#05d8f5] transition-colors duration-300 group shadow-lg shadow-[#0299b1]/20">
                   Start a Conversation
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                 </a>

@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import {
   Github,
   Twitter,
+  Instagram,
   Linkedin,
   Mail,
   MapPin,
@@ -47,11 +48,15 @@ const footerLinks = {
     { name: "Request Demo", href: "/products" },
   ],
 };
-
+  
 const socialLinks = [
   { icon: Twitter, href: "#", label: "Twitter" },
-  { icon: Linkedin, href: "#", label: "LinkedIn" },
-  { icon: Github, href: "#", label: "GitHub" },
+  { icon: Linkedin, href: import.meta.env.VITE_SPRINGVOX_LINKEDIN_URL, label: "LinkedIn" },
+  { icon: Instagram, href: import.meta.env.VITE_SPRINGVOX_INSTAGRAM_URL, label: "Instagram" },
+  // { icon: Tiktok, href: import.meta.env.VITE_SPRINGVOX_TIKTOK_URL, label: "TikTok" },
+  // { icon: Github, href: "#", label: "GitHub" },
+  // { icon: Github, href: "#", label: "GitHub" },
+  // { icon: Github, href: "#", label: "GitHub" },
 ];
 
 export default function Footer() {
@@ -94,18 +99,22 @@ export default function Footer() {
               solutions, digital marketing and brand promotion, cybersecurity
               tools, and enterprise automation.
             </p>
-            <div className="space-y-3">
+            <div className="space-y-3"> 
               <div className="flex items-center gap-3 text-gray-400 text-sm">
                 <Mail className="w-4 h-4 text-primary" />
-                support@springvox.com
+                {import.meta.env.VITE_EMAIL_CONTACT}
               </div>
-              <div className="flex items-center gap-3 text-gray-400 text-sm">
+              {/* <div className="flex items-center gap-3 text-gray-400 text-sm">
                 <Phone className="w-4 h-4 text-primary" />
                 +1 (360) 350-6562
+              </div> */}
+              <div className="flex items-center gap-3 text-gray-400 text-sm">
+                <Phone className="w-4 h-4 text-primary" />
+                {import.meta.env.VITE_PHONE_NUMBER}
               </div>
               <div className="flex items-center gap-3 text-gray-400 text-sm">
                 <MapPin className="w-4 h-4 text-primary" />
-                Global Offices - Remote First
+                We work remotely.
               </div>
             </div>
           </div>

@@ -97,7 +97,7 @@ export default function Navbar() {
             </Link>
 
             <a
-              to={import.meta.env.VITE_REKALL_IQ_URL}
+              href={import.meta.env.VITE_REKALL_IQ_URL}
                 target="_blank"
               className="btn-secondary bg-white text-gray-900 border-none flex items-center gap-2 text-sm"
             >
@@ -106,6 +106,8 @@ export default function Navbar() {
               </span>
               <ExternalLink className="w-4 h-4" />
             </a>
+
+            
           </div>
 
           <button

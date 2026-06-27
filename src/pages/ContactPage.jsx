@@ -49,7 +49,7 @@ const contactInfo = [
       </svg>
     ),
     label: "EMAIL US",
-    value: "support@springvox.com",
+    value: import.meta.env.VITE_EMAIL_CONTACT,
     sub: "We respond within 24 hours",
   },
   {
@@ -69,8 +69,8 @@ const contactInfo = [
       </svg>
     ),
     label: "CALL US",
-    value: "+1 (360) 350-6562",
-    sub: "Mon–Fri, 9am–6pm EST",
+    value: import.meta.env.VITE_PHONE_NUMBER,
+    sub: "Mon-Fri, 9am-6pm EST",
   },
   {
     icon: (
@@ -95,7 +95,7 @@ const contactInfo = [
     ),
     label: "HEADQUARTERS",
     value: "Global · Remote-First",
-    sub: "Offices in North America, Europe & Asia",
+    sub: "Remote in North America, Europe, Africa & Asia",
   },
   {
     icon: (
