@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 
 import { motion, useInView } from "framer-motion";
 import { Building2 } from "lucide-react";
+import { send_email } from "../utils/email";
 
 const inquiryTypes = [
   "General Inquiry",
@@ -14,19 +15,19 @@ const inquiryTypes = [
 
 const budgetOptions = [
   "Under $5,000",
-  "$5,000 – $10,000",
-  "$10,000 – $50,000",
-  "$50,000 – $150,000",
-  "$150,000 – $500,000",
+  "$5,000 - $10,000",
+  "$10,000 - $50,000",
+  "$50,000 - $150,000",
+  "$150,000 - $500,000",
   "$500,000+",
   "Not sure yet",
 ];
 
 const timelineOptions = [
   "ASAP",
-  "1 – 3 months",
-  "3 – 6 months",
-  "6 – 12 months",
+  "1 - 3 months",
+  "3 - 6 months",
+  "6 - 12 months",
   "12+ months",
   "Flexible",
 ];
@@ -155,9 +156,9 @@ function AnimatedCounter({ value, suffix = "", prefix = "" }) {
 }
 
 export default function ContactPage() {
-  const [selectedInquiry, setSelectedInquiry] = useState("Start a Project");
-  const [budget, setBudget] = useState("$10,000 – $50,000");
-  const [timeline, setTimeline] = useState("3 – 6 months");
+  const [selectedInquiry, setSelectedInquiry] = useState(inquiryTypes[1]);
+  const [budget, setBudget] = useState(budgetOptions[1]);
+  const [timeline, setTimeline] = useState(timelineOptions[1]);
   const [agreed, setAgreed] = useState(true);
   const [form, setForm] = useState({
     firstName: "",
@@ -173,6 +174,25 @@ export default function ContactPage() {
 
   const handleChange = (e) =>
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!agreed) {
+      alert("Please agree to the privacy policy before submitting.");
+      return;
+    }
+    const payload = {
+      ...form,
+      inquiryType: selectedInquiry,
+      budget: selectedInquiry === inquiryTypes[1] ? budget : null,
+      timeline: timeline,
+    }
+
+    // console.log('form payload', payload)
+    send_email(payload)
+  }
+
+
 
   return (
     <div className="min-h-screen pt-20 bg-[#050d0f] text-white font-sans">
@@ -221,7 +241,7 @@ export default function ContactPage() {
       <section className="px-8 md:px-16 lg:px-24 pb-20">
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Left: Form */}
-          <div className="flex-1 bg-[#0a1218] border border-white/5 rounded-2xl p-8">
+          <form onSubmit={handleSubmit} className="flex-1 bg-[#0a1218] border border-white/5 rounded-2xl p-8">
             <h2 className="text-xl font-semibold mb-1">Send Us a Message</h2>
             <p className="text-gray-400 text-sm mb-6">
               Fill in the details below and we'll reach out promptly.
@@ -236,6 +256,7 @@ export default function ContactPage() {
                 {inquiryTypes.map((type) => (
                   <button
                     key={type}
+                    type="button"
                     onClick={() => setSelectedInquiry(type)}
                     className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-all ${
                       selectedInquiry === type
@@ -335,6 +356,8 @@ export default function ContactPage() {
             </div>
 
             {/* Budget & Timeline */}
+            {selectedInquiry == inquiryTypes[1] && (
+
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
               <div>
                 <label className="block text-[10px] font-semibold tracking-widest text-gray-400 uppercase mb-1.5">
@@ -399,10 +422,15 @@ export default function ContactPage() {
                 </div>
               </div>
             </div>
+            )
+
+            }
+
 
             {/* Consent */}
             <div className="flex items-start gap-3 mb-6">
               <button
+              type="button"
                 onClick={() => setAgreed((v) => !v)}
                 className={`mt-0.5 w-4 h-4 flex-shrink-0 rounded flex items-center justify-center border transition-all ${
                   agreed
@@ -434,10 +462,10 @@ export default function ContactPage() {
             </div>
 
             {/* Submit */}
-            <button className="w-full bg-[#0299b1] hover:bg-[#01aac6] transition-colors text-white font-semibold py-3 rounded-lg text-sm">
+            <button type="submit" disabled={!agreed} className={`w-full ${agreed ? 'bg-[#0299b1] cursor-pointer': 'bg-[#0299b150] cursor-no-drop' }  hover:bg-[#01aac6] transition-colors text-white font-semibold py-3 rounded-lg text-sm`}>
               Send Message
             </button>
-          </div>
+          </form>
 
           {/* Right: Info + Map + Quick Actions */}
           <div className="lg:w-80 xl:w-96 flex flex-col gap-5">
